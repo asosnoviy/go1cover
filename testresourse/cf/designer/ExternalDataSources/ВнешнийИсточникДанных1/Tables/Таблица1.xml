@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:app="http://v8.1c.ru/8.2/managed-application/core" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:cmi="http://v8.1c.ru/8.2/managed-application/cmi" xmlns:ent="http://v8.1c.ru/8.1/data/enterprise" xmlns:lf="http://v8.1c.ru/8.2/managed-application/logform" xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows" xmlns:xen="http://v8.1c.ru/8.3/xcf/enums" xmlns:xpr="http://v8.1c.ru/8.3/xcf/predef" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.15">
+	<Table uuid="a2daba70-c996-4cd4-9478-00f901ac7ee6">
+		<InternalInfo>
+			<xr:GeneratedType name="ExternalDataSourceTableManager.ВнешнийИсточникДанных1.Таблица1" category="Manager">
+				<xr:TypeId>17cde360-568a-4047-a34c-0f071ed08793</xr:TypeId>
+				<xr:ValueId>ca051427-ea03-4a40-b3da-04650aae415d</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="ExternalDataSourceTableObject.ВнешнийИсточникДанных1.Таблица1" category="Object">
+				<xr:TypeId>f3f9578a-c5f6-49c3-afba-4d25492d2fb9</xr:TypeId>
+				<xr:ValueId>1d58afdc-4d1a-41c8-bdf7-ed88ba4bc2a6</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="ExternalDataSourceTableRef.ВнешнийИсточникДанных1.Таблица1" category="Ref">
+				<xr:TypeId>2d634389-4d89-4e9a-a877-4989c1a87a33</xr:TypeId>
+				<xr:ValueId>c90c510d-865b-4231-951a-137c33e01054</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="ExternalDataSourceTableList.ВнешнийИсточникДанных1.Таблица1" category="List">
+				<xr:TypeId>24a8d070-b2c7-44a8-9fcc-6fa0800641de</xr:TypeId>
+				<xr:ValueId>bb69fa42-901f-4a03-b271-53de57875b42</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="ExternalDataSourceTableRecord.ВнешнийИсточникДанных1.Таблица1" category="Record">
+				<xr:TypeId>76605411-4ba4-44bb-8fa8-45a6a491267e</xr:TypeId>
+				<xr:ValueId>3b266286-aa68-43fd-847a-0036efe8f7ee</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="ExternalDataSourceTableRecordSet.ВнешнийИсточникДанных1.Таблица1" category="RecordSet">
+				<xr:TypeId>d8deb5b8-302c-4154-8b98-a8a8747922db</xr:TypeId>
+				<xr:ValueId>97929457-a2a7-40f7-9344-a8ae3899def9</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="ExternalDataSourceTableRecordKey.ВнешнийИсточникДанных1.Таблица1" category="RecordKey">
+				<xr:TypeId>7ba8c8a7-7a5f-4bc6-9519-bb878e111544</xr:TypeId>
+				<xr:ValueId>fe5e6283-f5c7-455c-a9c8-f0636f4aa463</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="ExternalDataSourceTableRecordManager.ВнешнийИсточникДанных1.Таблица1" category="RecordManager">
+				<xr:TypeId>80a556af-9f3c-43b5-9b9b-87e1d4582c19</xr:TypeId>
+				<xr:ValueId>e8cde17c-2cdd-44ad-b92f-1c5f018acc35</xr:ValueId>
+			</xr:GeneratedType>
+		</InternalInfo>
+		<Properties>
+			<Name>Таблица1</Name>
+			<Synonym/>
+			<Comment/>
+			<TableType>Table</TableType>
+			<NameInDataSource>table</NameInDataSource>
+			<ExpressionInDataSource/>
+			<TableDataType>ObjectData</TableDataType>
+			<KeyFields>
+				<xr:Field>ExternalDataSource.ВнешнийИсточникДанных1.Table.Таблица1.Field.Поле1</xr:Field>
+			</KeyFields>
+			<PresentationField/>
+			<ParentField/>
+			<UnfilledParentValue xsi:nil="true"/>
+			<Characteristics/>
+			<UseStandardCommands>true</UseStandardCommands>
+			<QuickChoice>false</QuickChoice>
+			<InputByString>
+				<xr:Field>ExternalDataSource.ВнешнийИсточникДанных1.Table.Таблица1.Field.Поле1</xr:Field>
+			</InputByString>
+			<CreateOnInput>Auto</CreateOnInput>
+			<SearchStringModeOnInputByString>Begin</SearchStringModeOnInputByString>
+			<ChoiceDataGetModeOnInputByString>Directly</ChoiceDataGetModeOnInputByString>
+			<ChoiceHistoryOnInput>Auto</ChoiceHistoryOnInput>
+			<DefaultObjectForm>ExternalDataSource.ВнешнийИсточникДанных1.Table.Таблица1.Form.ФормаОбъекта</DefaultObjectForm>
+			<DefaultRecordForm/>
+			<DefaultListForm>ExternalDataSource.ВнешнийИсточникДанных1.Table.Таблица1.Form.ФормаСписка</DefaultListForm>
+			<DefaultChoiceForm/>
+			<ObjectPresentation/>
+			<ExtendedObjectPresentation/>
+			<RecordPresentation/>
+			<ExtendedRecordPresentation/>
+			<ListPresentation/>
+			<ExtendedListPresentation/>
+			<Explanation/>
+			<IncludeHelpInContents>false</IncludeHelpInContents>
+			<ReadOnly>false</ReadOnly>
+			<TransactionsIsolationLevel>Auto</TransactionsIsolationLevel>
+			<DataVersionField/>
+			<EditType>InDialog</EditType>
+			<BasedOn/>
+			<DataLockFields/>
+			<DataLockControlMode>Automatic</DataLockControlMode>
+		</Properties>
+		<ChildObjects>
+			<Field uuid="4bd30f1a-859f-4c9d-a3dc-4c4468978309">
+				<Properties>
+					<Name>Поле1</Name>
+					<Synonym/>
+					<Comment/>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>10</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+					</Type>
+					<PasswordMode>false</PasswordMode>
+					<Format/>
+					<EditFormat/>
+					<ToolTip/>
+					<MarkNegatives>false</MarkNegatives>
+					<Mask/>
+					<MultiLine>false</MultiLine>
+					<ExtendedEdit>false</ExtendedEdit>
+					<MinValue xsi:nil="true"/>
+					<MaxValue xsi:nil="true"/>
+					<FillFromFillingValue>false</FillFromFillingValue>
+					<FillValue xsi:type="xs:string"/>
+					<FillChecking>DontCheck</FillChecking>
+					<ChoiceParameterLinks/>
+					<ChoiceParameters/>
+					<QuickChoice>Auto</QuickChoice>
+					<CreateOnInput>Auto</CreateOnInput>
+					<ChoiceHistoryOnInput>Auto</ChoiceHistoryOnInput>
+					<ChoiceForm/>
+					<NameInDataSource>column1</NameInDataSource>
+					<ReadOnly>false</ReadOnly>
+					<AllowNull>false</AllowNull>
+				</Properties>
+			</Field>
+			<Form>ФормаОбъекта</Form>
+			<Form>ФормаСписка</Form>
+		</ChildObjects>
+	</Table>
+</MetaDataObject>

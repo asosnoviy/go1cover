@@ -18,7 +18,7 @@ func Run() {
 	fdbc.Deattach()
 
 	for md, v := range fdbc.Storage {
-		module := metareader.Module{ModuleTUuid: md.ObjectID, ModuleType: md.PropertyID}
+		module := metareader.Module{ModuleUuid: md.ObjectID, ModuleType: md.PropertyID}
 		fmt.Println(reader.CoverData().Data[module], v)
 	}
 

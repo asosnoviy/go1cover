@@ -28,7 +28,7 @@
 			</xr:ContainedObject>
 			<xr:ContainedObject>
 				<xr:ClassId>fb282519-d103-4dd3-bc12-cb271d631dfc</xr:ClassId>
-				<xr:ObjectId>2de1210c-0c03-4845-bc6e-1fac514fb0bb</xr:ObjectId>
+				<xr:ObjectId>259421d6-3a23-48bd-b80f-ab9ce22ccda2</xr:ObjectId>
 			</xr:ContainedObject>
 		</InternalInfo>
 		<Properties>
@@ -223,7 +223,6 @@
 			<SessionParameter>ПараметрСеанса1</SessionParameter>
 			<SessionParameter>НачалоСеанса</SessionParameter>
 			<Role>Роль1</Role>
-			<Role>Роль2</Role>
 			<CommonTemplate>Макет</CommonTemplate>
 			<FilterCriterion>КритерийОтбора1</FilterCriterion>
 			<CommonModule>ПростойОбщийМодуль</CommonModule>
@@ -250,6 +249,7 @@
 			<Constant>Константа1</Constant>
 			<Constant>ДатаЗавершенияФоновогоЗадания</Constant>
 			<CommonForm>Константы</CommonForm>
+			<CommonForm>Форма</CommonForm>
 			<Catalog>Справочник1</Catalog>
 			<Document>Документ1</Document>
 			<DocumentNumerator>НумераторДокументов1</DocumentNumerator>
@@ -258,7 +258,6 @@
 			<Enum>Перечисление1</Enum>
 			<Report>Отчет1</Report>
 			<DataProcessor>Обработка1</DataProcessor>
-			<DataProcessor>Обработка2</DataProcessor>
 			<InformationRegister>РегистрСведений1</InformationRegister>
 			<InformationRegister>РегистрСведений2</InformationRegister>
 			<AccumulationRegister>РегистрНакопления1</AccumulationRegister>
@@ -269,6 +268,7 @@
 			<CalculationRegister>РегистрРасчета1</CalculationRegister>
 			<BusinessProcess>БизнесПроцесс1</BusinessProcess>
 			<Task>Задача1</Task>
+			<ExternalDataSource>ВнешнийИсточникДанных1</ExternalDataSource>
 		</ChildObjects>
 	</Configuration>
 </MetaDataObject>
