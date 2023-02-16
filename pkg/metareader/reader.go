@@ -5,6 +5,7 @@ import (
 	"log"
 	"os"
 	"path"
+	"path/filepath"
 )
 
 type Metareader struct {
@@ -15,9 +16,10 @@ type Metareader struct {
 
 func New(src string) *Metareader {
 
+	path, _ := filepath.Abs(src)
 	metaReader := Metareader{
 		configuration: &configuration{},
-		srcpath:       src,
+		srcpath:       path,
 		coverData:     coverData{Data: make(map[Module]string)},
 	}
 
@@ -64,6 +66,15 @@ func (m *Metareader) Parse() {
 func (m *Metareader) CoverData() *coverData {
 
 	return &m.coverData
+}
+
+func (m *Metareader) Files() []string {
+
+	var files []string
+	for _, v := range m.coverData.Data {
+		files = append(files, v)
+	}
+	return files
 }
 
 func (m *Metareader) fillID(typeName string, objectNames []string) {
@@ -196,19 +207,19 @@ func (m *Metareader) fillID(typeName string, objectNames []string) {
 		case "CommonModules":
 			metaData := CommonModuleObj{}
 			xml.Unmarshal(file, &metaData)
-			m.coverData.Data[Module{ModuleUuid: metaData.Data.Uuid, ModuleType: SimpleModule}] = path.Join(m.srcpath, typeName, v, "Module.bsl")
+			m.coverData.Data[Module{ModuleUuid: metaData.Data.Uuid, ModuleType: SimpleModule}] = path.Join(m.srcpath, typeName, v, "Ext", "Module.bsl")
 		case "WebServices":
 			metaData := WebService{}
 			xml.Unmarshal(file, &metaData)
-			m.coverData.Data[Module{ModuleUuid: metaData.Data.Uuid, ModuleType: SimpleModule}] = path.Join(m.srcpath, typeName, v, "Module.bsl")
+			m.coverData.Data[Module{ModuleUuid: metaData.Data.Uuid, ModuleType: SimpleModule}] = path.Join(m.srcpath, typeName, v, "Ext", "Module.bsl")
 		case "HTTPServices":
 			metaData := HTTPService{}
 			xml.Unmarshal(file, &metaData)
-			m.coverData.Data[Module{ModuleUuid: metaData.Data.Uuid, ModuleType: SimpleModule}] = path.Join(m.srcpath, typeName, v, "Module.bsl")
+			m.coverData.Data[Module{ModuleUuid: metaData.Data.Uuid, ModuleType: SimpleModule}] = path.Join(m.srcpath, typeName, v, "Ext", "Module.bsl")
 		case "FilterCriteria":
 			metaData := FilterCriterion{}
 			xml.Unmarshal(file, &metaData)
-			m.coverData.Data[Module{ModuleUuid: metaData.Data.Uuid, ModuleType: ManagerModule}] = path.Join(m.srcpath, typeName, v, "ManagerModule.bsl")
+			m.coverData.Data[Module{ModuleUuid: metaData.Data.Uuid, ModuleType: ManagerModule}] = path.Join(m.srcpath, typeName, v, "Ext", "ManagerModule.bsl")
 
 			path := path.Join(m.srcpath, typeName, v)
 			fillform(m, path, metaData.Data.ChildObjects.Form)
@@ -216,7 +227,7 @@ func (m *Metareader) fillID(typeName string, objectNames []string) {
 		case "SettingsStorages":
 			metaData := SettingsStorage{}
 			xml.Unmarshal(file, &metaData)
-			m.coverData.Data[Module{ModuleUuid: metaData.Data.Uuid, ModuleType: ManagerModuleStorage}] = path.Join(m.srcpath, typeName, v, "ManagerModule.bsl")
+			m.coverData.Data[Module{ModuleUuid: metaData.Data.Uuid, ModuleType: ManagerModuleStorage}] = path.Join(m.srcpath, typeName, v, "Ext", "ManagerModule.bsl")
 
 			path := path.Join(m.srcpath, typeName, v)
 			fillform(m, path, metaData.Data.ChildObjects.Form)
@@ -240,24 +251,24 @@ func (m *Metareader) fillID(typeName string, objectNames []string) {
 		case "CommonCommands":
 			metaData := CommonCommand{}
 			xml.Unmarshal(file, &metaData)
-			m.coverData.Data[Module{ModuleUuid: metaData.Data.Uuid, ModuleType: CommandModule}] = path.Join(m.srcpath, typeName, v, "CommandModule.bsl")
+			m.coverData.Data[Module{ModuleUuid: metaData.Data.Uuid, ModuleType: CommandModule}] = path.Join(m.srcpath, typeName, v, "Ext", "CommandModule.bsl")
 		case "Enums":
 			metaData := Enum{}
 			xml.Unmarshal(file, &metaData)
-			m.coverData.Data[Module{ModuleUuid: metaData.Data.Uuid, ModuleType: ManagerModule}] = path.Join(m.srcpath, typeName, v, "ManagerModule.bsl")
+			m.coverData.Data[Module{ModuleUuid: metaData.Data.Uuid, ModuleType: ManagerModule}] = path.Join(m.srcpath, typeName, v, "Ext", "ManagerModule.bsl")
 			path := path.Join(m.srcpath, typeName, v)
 			fillform(m, path, metaData.Data.ChildObjects.Form)
 			fillcommand(m, path, metaData.Data.ChildObjects.Command)
 		case "Constants":
 			metaData := Constant{}
 			xml.Unmarshal(file, &metaData)
-			m.coverData.Data[Module{ModuleUuid: metaData.Data.Uuid, ModuleType: ManagerModule}] = path.Join(m.srcpath, typeName, v, "ManagerModule.bsl")
-			m.coverData.Data[Module{ModuleUuid: metaData.Data.Uuid, ModuleType: ValueManagerModule}] = path.Join(m.srcpath, typeName, v, "ValueManagerModule.bsl")
+			m.coverData.Data[Module{ModuleUuid: metaData.Data.Uuid, ModuleType: ManagerModule}] = path.Join(m.srcpath, typeName, v, "Ext", "ManagerModule.bsl")
+			m.coverData.Data[Module{ModuleUuid: metaData.Data.Uuid, ModuleType: ValueManagerModule}] = path.Join(m.srcpath, typeName, v, "Ext", "ValueManagerModule.bsl")
 
 		case "CommonForms":
 			metaData := CommonForm{}
 			xml.Unmarshal(file, &metaData)
-			m.coverData.Data[Module{ModuleUuid: metaData.Data.Uuid, ModuleType: FormModule}] = path.Join(m.srcpath, typeName, v, "Form", "Module.bsl")
+			m.coverData.Data[Module{ModuleUuid: metaData.Data.Uuid, ModuleType: FormModule}] = path.Join(m.srcpath, typeName, v, "Ext", "Form", "Module.bsl")
 
 		case "ExternalDataSources":
 			metaData := ExternalDataSource{}
@@ -283,7 +294,7 @@ func fillform(m *Metareader, srcpath string, formNames []string) {
 
 		metaData := Form{}
 		xml.Unmarshal(file, &metaData)
-		m.coverData.Data[Module{ModuleUuid: metaData.Data.Uuid, ModuleType: FormModule}] = path.Join(srcpath, "Forms", formName, "Form", "Module.bsl")
+		m.coverData.Data[Module{ModuleUuid: metaData.Data.Uuid, ModuleType: FormModule}] = path.Join(srcpath, "Forms", formName, "Ext", "Form", "Module.bsl")
 	}
 }
 

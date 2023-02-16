@@ -2,6 +2,7 @@ package metareader
 
 import (
 	"path"
+	"path/filepath"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -19,6 +20,7 @@ var reader *Metareader
 func init() {
 	reader = New(src)
 	reader.Parse()
+	src, _ = filepath.Abs(src)
 }
 
 func TestReader(t *testing.T) {
@@ -33,11 +35,11 @@ func TestReader(t *testing.T) {
 
 	module := Module{ModuleUuid: РегистрБухгалтерии1_ФормаСписка, ModuleType: FormModule}
 	assert.Contains(t, meta, module)
-	assert.Equal(t, path.Join(src, "AccountingRegisters", "РегистрБухгалтерии1", "Forms", "ФормаСписка", "Form", "Module.bsl"), meta[module])
+	assert.Equal(t, path.Join(src, "AccountingRegisters", "РегистрБухгалтерии1", "Forms", "ФормаСписка", "Ext", "Form", "Module.bsl"), meta[module])
 
 	module = Module{ModuleUuid: БизнесПроцесс1_ФормаБизнесПроцесса, ModuleType: FormModule}
 	assert.Contains(t, meta, module)
-	assert.Equal(t, path.Join(src, "BusinessProcesses", "БизнесПроцесс1", "Forms", "ФормаБизнесПроцесса", "Form", "Module.bsl"), meta[module])
+	assert.Equal(t, path.Join(src, "BusinessProcesses", "БизнесПроцесс1", "Forms", "ФормаБизнесПроцесса", "Ext", "Form", "Module.bsl"), meta[module])
 }
 
 func TestRegisters(t *testing.T) {
@@ -98,7 +100,7 @@ func TestEnum(t *testing.T) {
 
 	module := Module{ModuleUuid: enum.id, ModuleType: ManagerModule}
 	assert.Contains(t, meta, module)
-	assert.Equal(t, path.Join(src, enum.folder, enum.name, "ManagerModule.bsl"), meta[module])
+	assert.Equal(t, path.Join(src, enum.folder, enum.name, "Ext", "ManagerModule.bsl"), meta[module])
 }
 
 func TestFilterCriteria(t *testing.T) {
@@ -109,7 +111,7 @@ func TestFilterCriteria(t *testing.T) {
 
 	module := Module{ModuleUuid: FilterCriteria.id, ModuleType: ManagerModule}
 	assert.Contains(t, meta, module)
-	assert.Equal(t, path.Join(src, FilterCriteria.folder, FilterCriteria.name, "ManagerModule.bsl"), meta[module])
+	assert.Equal(t, path.Join(src, FilterCriteria.folder, FilterCriteria.name, "Ext", "ManagerModule.bsl"), meta[module])
 }
 
 func TestConstant(t *testing.T) {
@@ -120,11 +122,11 @@ func TestConstant(t *testing.T) {
 
 	module := Module{ModuleUuid: enum.id, ModuleType: ManagerModule}
 	assert.Contains(t, meta, module)
-	assert.Equal(t, path.Join(src, enum.folder, enum.name, "ManagerModule.bsl"), meta[module])
+	assert.Equal(t, path.Join(src, enum.folder, enum.name, "Ext", "ManagerModule.bsl"), meta[module])
 
 	module = Module{ModuleUuid: enum.id, ModuleType: ValueManagerModule}
 	assert.Contains(t, meta, module)
-	assert.Equal(t, path.Join(src, enum.folder, enum.name, "ValueManagerModule.bsl"), meta[module])
+	assert.Equal(t, path.Join(src, enum.folder, enum.name, "Ext", "ValueManagerModule.bsl"), meta[module])
 }
 
 func TestCommonForms(t *testing.T) {
@@ -135,7 +137,7 @@ func TestCommonForms(t *testing.T) {
 
 	module := Module{ModuleUuid: form.id, ModuleType: FormModule}
 	assert.Contains(t, meta, module)
-	assert.Equal(t, path.Join(src, form.folder, form.name, "Form", "Module.bsl"), meta[module])
+	assert.Equal(t, path.Join(src, form.folder, form.name,  "Ext", "Form", "Module.bsl"), meta[module])
 }
 
 func TestCommonCommands(t *testing.T) {
@@ -146,7 +148,7 @@ func TestCommonCommands(t *testing.T) {
 
 	module := Module{ModuleUuid: command.id, ModuleType: CommandModule}
 	assert.Contains(t, meta, module)
-	assert.Equal(t, path.Join(src, command.folder, command.name, "CommandModule.bsl"), meta[module])
+	assert.Equal(t, path.Join(src, command.folder, command.name, "Ext", "CommandModule.bsl"), meta[module])
 }
 
 func TestCommands(t *testing.T) {
@@ -172,7 +174,7 @@ func TestSettingsStorage(t *testing.T) {
 
 	module := Module{ModuleUuid: enum.id, ModuleType: ManagerModuleStorage}
 	assert.Contains(t, meta, module)
-	assert.Equal(t, path.Join(src, enum.folder, enum.name, "ManagerModule.bsl"), meta[module])
+	assert.Equal(t, path.Join(src, enum.folder, enum.name, "Ext", "ManagerModule.bsl"), meta[module])
 }
 
 func TesDocumentJournals(t *testing.T) {
@@ -183,7 +185,7 @@ func TesDocumentJournals(t *testing.T) {
 
 	module := Module{ModuleUuid: enum.id, ModuleType: ManagerModule}
 	assert.Contains(t, meta, module)
-	assert.Equal(t, path.Join(src, enum.folder, enum.name, "ManagerModule.bsl"), meta[module])
+	assert.Equal(t, path.Join(src, enum.folder, enum.name, "Ext", "ManagerModule.bsl"), meta[module])
 }
 
 func checkRegister(t *testing.T, meta map[Module]string, m *metaobject) {
@@ -209,5 +211,5 @@ func checkInstant(t *testing.T, meta map[Module]string, m *metaobject) {
 func checkSimple(t *testing.T, meta map[Module]string, m *metaobject) {
 	module := Module{ModuleUuid: m.id, ModuleType: SimpleModule}
 	assert.Contains(t, meta, module)
-	assert.Equal(t, path.Join(src, m.folder, m.name, "Module.bsl"), meta[module])
+	assert.Equal(t, path.Join(src, m.folder, m.name, "Ext", "Module.bsl"), meta[module])
 }
