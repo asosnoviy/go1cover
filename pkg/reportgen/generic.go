@@ -7,7 +7,7 @@ import (
 	"os"
 	"strconv"
 
-	coveragdata "github.com/asosnoviy/go1cover/internal/coveragData.go"
+	coveragdata "github.com/asosnoviy/go1cover/internal/coverageData"
 )
 
 type Generic struct {

@@ -1,6 +1,6 @@
 package reportgen
 
-import coveragdata "github.com/asosnoviy/go1cover/internal/coveragData.go"
+import coveragdata "github.com/asosnoviy/go1cover/internal/coverageData"
 
 type Reportgen struct {
 	reporters []ReporterInt
