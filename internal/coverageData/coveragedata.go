@@ -1,4 +1,4 @@
-package coveragdata
+package coveragedata
 
 import (
 	"log"
