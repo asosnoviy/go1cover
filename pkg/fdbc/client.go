@@ -20,14 +20,14 @@ type Fdbc struct {
 	Storage map[ModuleData][]LIneCoverage
 }
 
-func New() *Fdbc {
+func New(debuggerURL string) *Fdbc {
 
 	client := &http.Client{}
 	fdbg := &Fdbc{
 		client:         client,
 		infoBaseAlias:  "DefAlias",
 		idOfDebuggerUI: "1090f54e-4f23-4193-b005-5e59fe488bdf",
-		debuggerURL:    "http://127.0.0.1:1760",
+		debuggerURL:    debuggerURL,
 		Storage:        make(map[ModuleData][]LIneCoverage),
 	}
 

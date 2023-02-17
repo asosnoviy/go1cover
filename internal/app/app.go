@@ -7,6 +7,7 @@ import (
 	"sync"
 	"syscall"
 
+	"github.com/asosnoviy/go1cover/internal/config"
 	coveragdata "github.com/asosnoviy/go1cover/internal/coverageData"
 	"github.com/asosnoviy/go1cover/pkg/bslparser"
 	"github.com/asosnoviy/go1cover/pkg/fdbc"
@@ -19,20 +20,26 @@ func Run() {
 	var wg sync.WaitGroup
 	wg.Add(1)
 
-	reader := metareader.New("./testresourse/cf/designer")
+	config := &config.Config{
+		SrcPath:    "testresourse/cf/designer",
+		DebugerUrl: "http://localhost:1760",
+		Reporters:  []string{"lcov", "generic"},
+		RootPath:   "",
+	}
+
+	reader := metareader.New(config.SrcPath)
 	reader.Parse()
 	files := reader.Files()
 
 	parser := bslparser.New()
 	go parser.Parse(files)
 
-	fdebug := fdbc.New()
+	fdebug := fdbc.New(config.DebugerUrl)
 	fdebug.Init()
 	fdebug.Attach()
 
-	lcov := reportgen.NewLcov("lcov.info")
-	generic := reportgen.NewGeneric("generic.xml")
-	reportgen := reportgen.New(generic, lcov)
+	reporters := reportgen.NewReporters(config.Reporters)
+	reportgen := reportgen.New(reporters...)
 
 	termchan := make(chan os.Signal)
 	signal.Notify(termchan, os.Interrupt, syscall.SIGTERM)
@@ -45,7 +52,7 @@ func Run() {
 	wg.Wait()
 
 	fdebug.Deattach()
-	coverage := coveragdata.Convert(parser, reader, fdebug)
+	coverage := coveragdata.Convert(parser, reader, fdebug, config.RootPath)
 	reportgen.Report(coverage)
 
 	fmt.Println("Coverage:", fmt.Sprint(coveragdata.Covered(fdebug, parser)), "%")
