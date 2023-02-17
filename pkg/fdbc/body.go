@@ -1,6 +1,6 @@
 package fdbc
 
-func attachDebugUI(f *fdbc) string {
+func attachDebugUI(f *Fdbc) string {
 	return `<?xml version="1.0" encoding="UTF-8"?>
 	<request xmlns:response="http://v8.1c.ru/8.3/debugger/debugRDBGRequestResponse">
 	  <response:infoBaseAlias>` + f.infoBaseAlias + `</response:infoBaseAlias>
@@ -8,7 +8,7 @@ func attachDebugUI(f *fdbc) string {
 	</request>`
 }
 
-func initSettings(f *fdbc) string {
+func initSettings(f *Fdbc) string {
 	return `<?xml version="1.0" encoding="UTF-8"?>
 	<request xmlns:response="http://v8.1c.ru/8.3/debugger/debugRDBGRequestResponse">
 	  <response:infoBaseAlias>` + f.infoBaseAlias + `</response:infoBaseAlias>
@@ -16,7 +16,7 @@ func initSettings(f *fdbc) string {
 	</request>`
 }
 
-func setMeasureMode(f *fdbc) string {
+func setMeasureMode(f *Fdbc) string {
 	return `<?xml version="1.0" encoding="UTF-8"?>
 	<request xmlns:response="http://v8.1c.ru/8.3/debugger/debugRDBGRequestResponse">
 	  <response:infoBaseAlias>` + f.infoBaseAlias + `</response:infoBaseAlias>
@@ -25,7 +25,7 @@ func setMeasureMode(f *fdbc) string {
 	</request>`
 }
 
-func setMeasureModeOff(f *fdbc) string {
+func setMeasureModeOff(f *Fdbc) string {
 	return `<?xml version="1.0" encoding="UTF-8"?>
 	<request xmlns:response="http://v8.1c.ru/8.3/debugger/debugRDBGRequestResponse">
 	  <response:infoBaseAlias>` + f.infoBaseAlias + `</response:infoBaseAlias>
@@ -33,7 +33,7 @@ func setMeasureModeOff(f *fdbc) string {
 	</request>`
 }
 
-func setAutoAttachSettings(f *fdbc) string {
+func setAutoAttachSettings(f *Fdbc) string {
 	return `<?xml version="1.0" encoding="UTF-8"?>
 	<request xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:attach="http://v8.1c.ru/8.3/debugger/debugAutoAttach" xmlns:response="http://v8.1c.ru/8.3/debugger/debugRDBGRequestResponse">
 	  <response:infoBaseAlias>` + f.infoBaseAlias + `</response:infoBaseAlias>

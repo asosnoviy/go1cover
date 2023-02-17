@@ -7,21 +7,23 @@ import (
 	"log"
 	"net/http"
 	"strings"
+	"sync"
 	"time"
 )
 
-type fdbc struct {
+type Fdbc struct {
 	client         *http.Client
 	infoBaseAlias  string
 	idOfDebuggerUI string
 	debuggerURL    string
-	Storage        map[ModuleData][]LIneCoverage
+	sync.Mutex
+	Storage map[ModuleData][]LIneCoverage
 }
 
-func New() *fdbc {
+func New() *Fdbc {
 
 	client := &http.Client{}
-	fdbg := &fdbc{
+	fdbg := &Fdbc{
 		client:         client,
 		infoBaseAlias:  "DefAlias",
 		idOfDebuggerUI: "1090f54e-4f23-4193-b005-5e59fe488bdf",
@@ -32,28 +34,26 @@ func New() *fdbc {
 	return fdbg
 }
 
-func (f *fdbc) Init() {
+func (f *Fdbc) Init() {
 
 	doRequest(f.client, f.debuggerURL+"/e1crdbg/rdbg?cmd=attachDebugUI", attachDebugUI(f))
 	doRequest(f.client, f.debuggerURL+"/e1crdbg/rdbg?cmd=initSettings", initSettings(f))
 	doRequest(f.client, f.debuggerURL+"/e1crdbg/rdbg?cmd=setAutoAttachSettings", setAutoAttachSettings(f))
 }
 
-func (f *fdbc) Attach() {
+func (f *Fdbc) Attach() {
 	doRequest(f.client, f.debuggerURL+"/e1crdbg/rdbg?cmd=setMeasureMode", setMeasureMode(f))
-	for i := 0; i < 2; i++ {
-		pingResult := doRequest(f.client, f.debuggerURL+"/e1crdbg/rdbg?cmd=pingDebugUIParams&dbgui="+f.idOfDebuggerUI, "")
-
-		// dumpResponse, _ := httputil.DumpResponse(pingResult, true)
-		// fmt.Println(string(dumpResponse))
-
-		pingResultComplete(f, pingResult)
-		time.Sleep(10 * time.Second)
-	}
+	go func() {
+		for {
+			pingResult := doRequest(f.client, f.debuggerURL+"/e1crdbg/rdbg?cmd=pingDebugUIParams&dbgui="+f.idOfDebuggerUI, "")
+			pingResultComplete(f, pingResult)
+			time.Sleep(500 * time.Microsecond)
+		}
+	}()
 
 }
 
-func (f *fdbc) Deattach() {
+func (f *Fdbc) Deattach() {
 	doRequest(f.client, f.debuggerURL+"/e1crdbg/rdbg?cmd=setMeasureMode", setMeasureModeOff(f))
 }
 
@@ -80,7 +80,7 @@ func newRequest(url string, body string) *http.Request {
 	return req
 }
 
-func pingResultComplete(f *fdbc, pingResp *http.Response) {
+func pingResultComplete(f *Fdbc, pingResp *http.Response) {
 
 	if pingResp.StatusCode != 200 {
 		fmt.Println("--Ping--")
@@ -94,14 +94,17 @@ func pingResultComplete(f *fdbc, pingResp *http.Response) {
 	measure := Response{}
 	measure.Unmarshal(body)
 
+	// fmt.Println(measure)
+
 	for _, r := range measure.Result {
 		for _, md := range r.Measure.ModuleData {
 			module := ModuleData{ObjectID: md.ModuleID.ObjectID, PropertyID: md.ModuleID.PropertyID}
 			for _, li := range md.LineInfo {
 
 				data := f.Storage[module]
+				f.Mutex.Lock()
 				f.Storage[module] = append(data, LIneCoverage{LineNo: li.LineNo, Covered: true})
-
+				f.Mutex.Unlock()
 			}
 
 		}

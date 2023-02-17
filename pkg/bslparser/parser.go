@@ -11,17 +11,17 @@ import (
 	"github.com/asosnoviy/go1cover/pkg/bslparser/parser"
 )
 
-type bslparser struct {
+type Bslparser struct {
 	wg sync.WaitGroup
 	sync.Mutex
 	LinesToCover map[string][]int
 }
 
-func New() *bslparser {
-	return &bslparser{LinesToCover: make(map[string][]int)}
+func New() *Bslparser {
+	return &Bslparser{LinesToCover: make(map[string][]int)}
 }
 
-func (p *bslparser) Files(folder string) ([]string, error) {
+func (p *Bslparser) Files(folder string) ([]string, error) {
 	var files []string
 	err := filepath.Walk(folder, func(path string, info os.FileInfo, err error) error {
 
@@ -39,7 +39,7 @@ func (p *bslparser) Files(folder string) ([]string, error) {
 
 }
 
-func (p *bslparser) Parse(files []string) error {
+func (p *Bslparser) Parse(files []string) error {
 
 	for _, file := range files {
 		p.wg.Add(1)
@@ -50,10 +50,10 @@ func (p *bslparser) Parse(files []string) error {
 	return nil
 }
 
-func (p *bslparser) Parsefile(path string) []int {
+func (p *Bslparser) Parsefile(path string) []int {
 
 	p.wg.Add(1)
-	p.parsefile(path)
+	p.Parsefile(path)
 
 	v, ok := p.LinesToCover[path]
 	if ok {
@@ -63,7 +63,7 @@ func (p *bslparser) Parsefile(path string) []int {
 	return []int{}
 }
 
-func (p *bslparser) parsefile(path string) {
+func (p *Bslparser) parsefile(path string) {
 	_, err := os.Stat(path)
 	if err != nil {
 		fmt.Println("filr not found:", path)
