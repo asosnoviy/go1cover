@@ -18,7 +18,7 @@ func NewLcov(path string) *Lcov {
 	return &Lcov{Reporter{Path: path}}
 }
 
-func (r Lcov) Generate(coverage *coveragdata.Coverage) {
+func (r *Lcov) Generate(coverage *coveragdata.Coverage) {
 	fmt.Println("Lcov generate", r.Path)
 
 	f, err := os.Create(r.Path)

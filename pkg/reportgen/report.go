@@ -1,6 +1,10 @@
 package reportgen
 
-import coveragdata "github.com/asosnoviy/go1cover/internal/coverageData"
+import (
+	"log"
+
+	coveragdata "github.com/asosnoviy/go1cover/internal/coverageData"
+)
 
 type Reportgen struct {
 	reporters []ReporterInt
@@ -18,6 +22,30 @@ type Reporter struct {
 func New(reporter ...ReporterInt) Reportgen {
 
 	return Reportgen{reporters: reporter}
+}
+
+func NewReporters(reportersName []string) []ReporterInt {
+
+	reportest := []ReporterInt{}
+	for _, reporterName := range reportersName {
+
+		switch reporterName {
+		case "lcov":
+			{
+				reportest = append(reportest, NewLcov("lcov.info"))
+			}
+		case "generic":
+			{
+				reportest = append(reportest, NewGeneric("generic.xml"))
+			}
+		default:
+			log.Panicf("Uncnown reporter %s", reporterName)
+
+		}
+
+	}
+
+	return reportest
 }
 
 func (g Reportgen) Report(coverage *coveragdata.Coverage) {
