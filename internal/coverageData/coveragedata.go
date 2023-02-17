@@ -1,7 +1,7 @@
 package coveragdata
 
 import (
-	"os"
+	"log"
 	"path/filepath"
 	"strconv"
 
@@ -14,10 +14,14 @@ type Coverage struct {
 	Data map[string]map[int]bool
 }
 
-func Convert(parser *bslparser.Bslparser, reader *metareader.Metareader, fdbc *fdbc.Fdbc) *Coverage {
+func Convert(parser *bslparser.Bslparser, reader *metareader.Metareader, fdbc *fdbc.Fdbc, basePath string) *Coverage {
 
 	data := map[string]map[int]bool{}
-	cwd, _ := os.Getwd()
+
+	cwd, err := filepath.Abs(basePath)
+	if err != nil {
+		log.Panic(err)
+	}
 
 	for k, v := range parser.LinesToCover {
 
