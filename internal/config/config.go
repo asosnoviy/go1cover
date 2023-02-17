@@ -5,4 +5,5 @@ type Config struct {
 	DebugerUrl string
 	Reporters  []string
 	RootPath   string
+	Port       string
 }

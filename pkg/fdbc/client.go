@@ -16,6 +16,8 @@ type Fdbc struct {
 	infoBaseAlias  string
 	idOfDebuggerUI string
 	debuggerURL    string
+	timeChan       *time.Ticker
+	stopChan       chan bool
 	sync.Mutex
 	Storage map[ModuleData][]LIneCoverage
 }
@@ -29,6 +31,8 @@ func New(debuggerURL string) *Fdbc {
 		idOfDebuggerUI: "1090f54e-4f23-4193-b005-5e59fe488bdf",
 		debuggerURL:    debuggerURL,
 		Storage:        make(map[ModuleData][]LIneCoverage),
+		timeChan:       time.NewTicker(500 * time.Millisecond),
+		stopChan:       make(chan bool, 2),
 	}
 
 	return fdbg
@@ -43,18 +47,37 @@ func (f *Fdbc) Init() {
 
 func (f *Fdbc) Attach() {
 	doRequest(f.client, f.debuggerURL+"/e1crdbg/rdbg?cmd=setMeasureMode", setMeasureMode(f))
+
 	go func() {
+
 		for {
-			pingResult := doRequest(f.client, f.debuggerURL+"/e1crdbg/rdbg?cmd=pingDebugUIParams&dbgui="+f.idOfDebuggerUI, "")
-			pingResultComplete(f, pingResult)
-			time.Sleep(500 * time.Microsecond)
+			select {
+			case <-f.stopChan:
+				{
+					return
+				}
+			case <-f.timeChan.C:
+				{
+					pingResult := doRequest(f.client, f.debuggerURL+"/e1crdbg/rdbg?cmd=pingDebugUIParams&dbgui="+f.idOfDebuggerUI, "")
+					pingResultComplete(f, pingResult)
+				}
+
+			}
 		}
 	}()
 
 }
 
 func (f *Fdbc) Deattach() {
+
 	doRequest(f.client, f.debuggerURL+"/e1crdbg/rdbg?cmd=setMeasureMode", setMeasureModeOff(f))
+
+}
+
+func (f *Fdbc) Stop() {
+
+	f.timeChan.Stop()
+	f.stopChan <- true
 }
 
 func (f *Fdbc) LinesCount() int {
