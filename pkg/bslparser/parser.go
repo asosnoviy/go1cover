@@ -63,6 +63,14 @@ func (p *Bslparser) Parsefile(path string) []int {
 	return []int{}
 }
 
+func (p *Bslparser) LinesCount() int {
+	linescount := 0
+	for _, v := range p.LinesToCover {
+		linescount += len(v)
+	}
+	return linescount
+}
+
 func (p *Bslparser) parsefile(path string) {
 	_, err := os.Stat(path)
 	if err != nil {

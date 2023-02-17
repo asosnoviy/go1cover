@@ -45,3 +45,14 @@ func Convert(parser *bslparser.Bslparser, reader *metareader.Metareader, fdbc *f
 
 	return &Coverage{Data: data}
 }
+
+func Covered(fdebug *fdbc.Fdbc, parser *bslparser.Bslparser) int {
+
+	parsetLines := parser.LinesCount()
+	if parsetLines == 0 {
+		return 0
+	}
+
+	covered := fdebug.LinesCount() * 100 / parsetLines
+	return covered
+}

@@ -57,6 +57,15 @@ func (f *Fdbc) Deattach() {
 	doRequest(f.client, f.debuggerURL+"/e1crdbg/rdbg?cmd=setMeasureMode", setMeasureModeOff(f))
 }
 
+func (f *Fdbc) LinesCount() int {
+	linescount := 0
+	for _, v := range f.Storage {
+
+		linescount += len(v)
+	}
+	return linescount
+}
+
 func doRequest(client *http.Client, url string, body string) *http.Response {
 
 	req := newRequest(url, body)

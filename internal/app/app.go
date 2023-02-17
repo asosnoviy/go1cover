@@ -47,5 +47,7 @@ func Run() {
 	fdebug.Deattach()
 	coverage := coveragdata.Convert(parser, reader, fdebug)
 	reportgen.Report(coverage)
+
+	fmt.Println("Coverage:", fmt.Sprint(coveragdata.Covered(fdebug, parser)), "%")
 	fmt.Println("Goob bye")
 }
