@@ -36,7 +36,6 @@ func (p *Bslparser) Files(folder string) ([]string, error) {
 	}
 
 	return files, nil
-
 }
 
 func (p *Bslparser) Parse(files []string) error {
@@ -53,7 +52,7 @@ func (p *Bslparser) Parse(files []string) error {
 func (p *Bslparser) Parsefile(path string) []int {
 
 	p.wg.Add(1)
-	p.Parsefile(path)
+	p.parsefile(path)
 
 	v, ok := p.LinesToCover[path]
 	if ok {
