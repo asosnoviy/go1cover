@@ -40,12 +40,27 @@ func New(debuggerURL string) *Fdbc {
 
 func (f *Fdbc) Init() {
 
+	if len(f.debuggerURL) == 0 {
+
+		log.Println("Empty debugger URL debug connect skipped")
+		return
+
+	}
+
 	doRequest(f.client, f.debuggerURL+"/e1crdbg/rdbg?cmd=attachDebugUI", attachDebugUI(f))
 	doRequest(f.client, f.debuggerURL+"/e1crdbg/rdbg?cmd=initSettings", initSettings(f))
 	doRequest(f.client, f.debuggerURL+"/e1crdbg/rdbg?cmd=setAutoAttachSettings", setAutoAttachSettings(f))
 }
 
 func (f *Fdbc) Attach() {
+
+	if len(f.debuggerURL) == 0 {
+
+		log.Println("Empty debugger URL debug connect skipped")
+		return
+
+	}
+
 	doRequest(f.client, f.debuggerURL+"/e1crdbg/rdbg?cmd=setMeasureMode", setMeasureMode(f))
 
 	go func() {
@@ -70,8 +85,13 @@ func (f *Fdbc) Attach() {
 
 func (f *Fdbc) Deattach() {
 
-	doRequest(f.client, f.debuggerURL+"/e1crdbg/rdbg?cmd=setMeasureMode", setMeasureModeOff(f))
+	if len(f.debuggerURL) == 0 {
 
+		log.Println("Empty debugger URL debug connect skipped")
+		return
+
+	}
+	doRequest(f.client, f.debuggerURL+"/e1crdbg/rdbg?cmd=setMeasureMode", setMeasureModeOff(f))
 }
 
 func (f *Fdbc) Stop() {
