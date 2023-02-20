@@ -15,7 +15,19 @@ import (
 	"github.com/asosnoviy/go1cover/pkg/reportgen"
 )
 
-func Run() {
+type context struct {
+	config      *config.Config
+	coverserver *coverserver.CoverageServer
+	reader      *metareader.Metareader
+	parser      *bslparser.Bslparser
+	fdebug      *fdbc.Fdbc
+	reportgen   *reportgen.Reportgen
+	RunChan     chan bool
+	stopChan    chan bool
+	termChan    chan os.Signal
+}
+
+func Init() *context {
 
 	config := &config.Config{
 		SrcPath:    "testresourse/cf/designer",
@@ -25,7 +37,7 @@ func Run() {
 		Port:       ":4040",
 	}
 
-	runChan := make(chan bool)
+	runChan := make(chan bool, 1)
 	stopChan := make(chan bool)
 	termchan := make(chan os.Signal, 5)
 	signal.Notify(termchan, os.Interrupt, syscall.SIGTERM)
@@ -40,19 +52,37 @@ func Run() {
 	reporters := reportgen.NewReporters(config.Reporters)
 	reportgen := reportgen.New(reporters...)
 
+	context := &context{
+		config:      config,
+		coverserver: server,
+		reader:      reader,
+		parser:      parser,
+		fdebug:      fdebug,
+		reportgen:   reportgen,
+		RunChan:     runChan,
+		stopChan:    stopChan,
+		termChan:    termchan,
+	}
+	return context
+}
+
+func Run(context *context) {
+
 	for {
 		select {
-		case <-runChan:
+		case <-context.RunChan:
 			{
-				go Start(reader, parser, fdebug, config)
+				go start(context)
 			}
-		case <-stopChan:
+		case <-context.stopChan:
 			{
-				go Stop(reader, parser, fdebug, reportgen, config)
+				Stop(context)
 				fmt.Println("Goob bye")
+				return
 			}
-		case <-termchan:
+		case <-context.termChan:
 			{
+				Stop(context)
 				os.Exit(10)
 			}
 
@@ -61,27 +91,27 @@ func Run() {
 
 }
 
-func Start(reader *metareader.Metareader, parser *bslparser.Bslparser, fdebug *fdbc.Fdbc, config *config.Config) {
+func start(context *context) {
 
 	println("---Start---")
 
-	reader.Parse()
+	context.reader.Parse()
 
-	files := reader.Files()
-	go parser.Parse(files)
+	files := context.reader.Files()
+	go context.parser.Parse(files)
 
-	fdebug.Init()
-	fdebug.Attach()
+	context.fdebug.Init()
+	context.fdebug.Attach()
 
 }
 
-func Stop(reader *metareader.Metareader, parser *bslparser.Bslparser, fdebug *fdbc.Fdbc, reportgen *reportgen.Reportgen, config *config.Config) {
+func Stop(context *context) {
 
 	println("---Stop---")
 
-	fdebug.Deattach()
-	fdebug.Stop()
-	coverage := coveragedata.Convert(parser, reader, fdebug, config.RootPath)
-	reportgen.Report(coverage)
+	context.fdebug.Deattach()
+	context.fdebug.Stop()
+	coverage := coveragedata.Convert(context.parser.LinesToCover, context.reader.CoverData().Data, context.fdebug.Storage, context.config.RootPath)
+	context.reportgen.Report(coverage)
 
 }
