@@ -1,0 +1,3 @@
+port: "4040"
+debuggerUrl: "http://127.0.0.1:1760"
+source: "./testresourse/cf/designer"
