@@ -2,6 +2,7 @@ package metareader
 
 import (
 	"encoding/xml"
+	"log"
 	"os"
 	"path"
 )
@@ -43,7 +44,7 @@ func (c *configuration) unmarshalConfig(configurationPatch string) {
 
 	configurationFile, err := os.ReadFile(path.Join(configurationPatch, "Configuration.xml"))
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 
 	xml.Unmarshal(configurationFile, &c)
