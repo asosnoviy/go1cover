@@ -2,6 +2,7 @@ package reportgen
 
 import (
 	"log"
+	"strings"
 
 	coveragdata "github.com/asosnoviy/go1cover/internal/coverageData"
 )
@@ -19,9 +20,9 @@ type Reporter struct {
 	Path string
 }
 
-func New(reporter ...ReporterInt) Reportgen {
+func New(reporter ...ReporterInt) *Reportgen {
 
-	return Reportgen{reporters: reporter}
+	return &Reportgen{reporters: reporter}
 }
 
 func NewReporters(reportersName []string) []ReporterInt {
@@ -29,7 +30,7 @@ func NewReporters(reportersName []string) []ReporterInt {
 	reportest := []ReporterInt{}
 	for _, reporterName := range reportersName {
 
-		switch reporterName {
+		switch strings.TrimSpace(reporterName) {
 		case "lcov":
 			{
 				reportest = append(reportest, NewLcov("lcov.info"))
@@ -39,7 +40,7 @@ func NewReporters(reportersName []string) []ReporterInt {
 				reportest = append(reportest, NewGeneric("generic.xml"))
 			}
 		default:
-			log.Panicf("Uncnown reporter %s", reporterName)
+			log.Fatalf("Unknown reporter %s", reporterName)
 
 		}
 
@@ -48,7 +49,7 @@ func NewReporters(reportersName []string) []ReporterInt {
 	return reportest
 }
 
-func (g Reportgen) Report(coverage *coveragdata.Coverage) {
+func (g *Reportgen) Report(coverage *coveragdata.Coverage) {
 
 	for _, repot := range g.reporters {
 
