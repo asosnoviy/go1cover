@@ -1,7 +1,7 @@
 package bslparser
 
 import (
-	"fmt"
+	"log"
 	"os"
 	"path/filepath"
 	"sort"
@@ -73,7 +73,7 @@ func (p *Bslparser) LinesCount() int {
 func (p *Bslparser) parsefile(path string) {
 	_, err := os.Stat(path)
 	if err != nil {
-		fmt.Println("filr not found:", path)
+		log.Println("file not found:", path)
 		return
 	}
 	is, _ := antlr.NewFileStream(path)
