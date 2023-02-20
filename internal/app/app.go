@@ -27,22 +27,14 @@ type context struct {
 	termChan    chan os.Signal
 }
 
-func Init() *context {
-
-	config := &config.Config{
-		SrcPath:    "testresourse/cf/designer",
-		DebugerUrl: "http://localhost:1760",
-		Reporters:  []string{"lcov", "generic"},
-		RootPath:   "",
-		Port:       ":4040",
-	}
+func Init(config *config.Config) *context {
 
 	runChan := make(chan bool, 1)
 	stopChan := make(chan bool)
 	termchan := make(chan os.Signal, 5)
 	signal.Notify(termchan, os.Interrupt, syscall.SIGTERM)
 
-	server := coverserver.New(config.Port, runChan, stopChan)
+	server := coverserver.New(":"+config.Port, runChan, stopChan)
 	go server.Run()
 
 	reader := metareader.New(config.SrcPath)
