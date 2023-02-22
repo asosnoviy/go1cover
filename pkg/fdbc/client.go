@@ -22,6 +22,10 @@ type Fdbc struct {
 	Storage map[ModuleData][]LIneCoverage
 }
 
+const (
+	emptyDebugskipped string = "Empty debugger URL debug connect skipped"
+)
+
 func New(debuggerURL string) *Fdbc {
 
 	client := &http.Client{}
@@ -42,7 +46,7 @@ func (f *Fdbc) Init() {
 
 	if len(f.debuggerURL) == 0 {
 
-		log.Println("Empty debugger URL debug connect skipped")
+		log.Println(emptyDebugskipped)
 		return
 
 	}
@@ -56,7 +60,7 @@ func (f *Fdbc) Attach() {
 
 	if len(f.debuggerURL) == 0 {
 
-		log.Println("Empty debugger URL debug connect skipped")
+		log.Println(emptyDebugskipped)
 		return
 
 	}
@@ -87,7 +91,7 @@ func (f *Fdbc) Deattach() {
 
 	if len(f.debuggerURL) == 0 {
 
-		log.Println("Empty debugger URL debug connect skipped")
+		log.Println(emptyDebugskipped)
 		return
 
 	}
@@ -116,7 +120,6 @@ func doRequest(client *http.Client, url string, body string) *http.Response {
 	if err != nil {
 		log.Fatal("Error reading response. ", err)
 	}
-	// defer resp.Body.Close()
 	return resp
 }
 
@@ -145,8 +148,6 @@ func pingResultComplete(f *Fdbc, pingResp *http.Response) {
 
 	measure := Response{}
 	measure.Unmarshal(body)
-
-	// fmt.Println(measure)
 
 	for _, r := range measure.Result {
 		for _, md := range r.Measure.ModuleData {
