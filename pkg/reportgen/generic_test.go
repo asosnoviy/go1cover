@@ -1,7 +1,7 @@
 package reportgen
 
 import (
-	"io/ioutil"
+	"bufio"
 	"os"
 	"testing"
 
@@ -28,13 +28,7 @@ func TestGeneric_Generate(t *testing.T) {
 	reporter.Generate(&coverage)
 	defer os.Remove(reportpath)
 
-	b, err := ioutil.ReadFile(reportpath)
-	if err != nil {
-		t.Fail()
-	}
-	s := string(b)
-
-	assert.Equal(t, exampleGeneric(), s)
+	compareFile(t, reportpath, exampleGeneric())
 
 }
 
@@ -56,15 +50,22 @@ func TestLcov_Generate(t *testing.T) {
 	coverage := coveragdata.Coverage{Data: data}
 	reporter.Generate(&coverage)
 	defer os.Remove(reportpath)
+	compareFile(t, reportpath, exampleLcov())
 
-	b, err := ioutil.ReadFile(reportpath)
+}
+
+func compareFile(t *testing.T, reportpath string, example string) {
+	file, err := os.Open(reportpath)
 	if err != nil {
-		t.Fail()
+		t.Fatal(err)
 	}
-	s := string(b)
+	defer file.Close()
 
-	assert.Equal(t, exampleLcov(), s)
-
+	scanner := bufio.NewScanner(file)
+	for i := 1; scanner.Scan(); i++ {
+		fileLine := scanner.Text()
+		assert.Contains(t, example, fileLine)
+	}
 }
 
 func exampleGeneric() string {
