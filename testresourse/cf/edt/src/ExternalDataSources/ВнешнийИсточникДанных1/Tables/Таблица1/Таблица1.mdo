@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Table xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="a2daba70-c996-4cd4-9478-00f901ac7ee6">
+  <producedTypes>
+    <refType typeId="2d634389-4d89-4e9a-a877-4989c1a87a33" valueTypeId="c90c510d-865b-4231-951a-137c33e01054"/>
+    <listType typeId="24a8d070-b2c7-44a8-9fcc-6fa0800641de" valueTypeId="bb69fa42-901f-4a03-b271-53de57875b42"/>
+    <objectType typeId="f3f9578a-c5f6-49c3-afba-4d25492d2fb9" valueTypeId="1d58afdc-4d1a-41c8-bdf7-ed88ba4bc2a6"/>
+    <managerType typeId="17cde360-568a-4047-a34c-0f071ed08793" valueTypeId="ca051427-ea03-4a40-b3da-04650aae415d"/>
+    <recordManagerType typeId="80a556af-9f3c-43b5-9b9b-87e1d4582c19" valueTypeId="e8cde17c-2cdd-44ad-b92f-1c5f018acc35"/>
+    <recordSetType typeId="d8deb5b8-302c-4154-8b98-a8a8747922db" valueTypeId="97929457-a2a7-40f7-9344-a8ae3899def9"/>
+    <recordType typeId="76605411-4ba4-44bb-8fa8-45a6a491267e" valueTypeId="3b266286-aa68-43fd-847a-0036efe8f7ee"/>
+    <recordKeyType typeId="7ba8c8a7-7a5f-4bc6-9519-bb878e111544" valueTypeId="fe5e6283-f5c7-455c-a9c8-f0636f4aa463"/>
+  </producedTypes>
+  <name>Таблица1</name>
+  <parentDataSource>ExternalDataSource.ВнешнийИсточникДанных1</parentDataSource>
+  <nameInDataSource>table</nameInDataSource>
+  <keyFields>ExternalDataSource.ВнешнийИсточникДанных1.Table.Таблица1.Field.Поле1</keyFields>
+  <unfilledParentValue xsi:type="core:UndefinedValue"/>
+  <useStandardCommands>true</useStandardCommands>
+  <inputByString>ExternalDataSource.ВнешнийИсточникДанных1.Table.Таблица1.Field.Поле1</inputByString>
+  <defaultObjectForm>ExternalDataSource.ВнешнийИсточникДанных1.Table.Таблица1.Form.ФормаОбъекта</defaultObjectForm>
+  <defaultListForm>ExternalDataSource.ВнешнийИсточникДанных1.Table.Таблица1.Form.ФормаСписка</defaultListForm>
+  <editType>InDialog</editType>
+  <tableFields uuid="4bd30f1a-859f-4c9d-a3dc-4c4468978309">
+    <name>Поле1</name>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>10</length>
+      </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:StringValue">
+      <value></value>
+    </fillValue>
+    <nameInDataSource>column1</nameInDataSource>
+  </tableFields>
+  <forms uuid="b61902e8-e31a-4552-baea-206b787001dc">
+    <name>ФормаОбъекта</name>
+    <synonym>
+      <key>ru</key>
+      <value>Форма объекта</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="be0cc167-079d-47be-9577-ba8035765b38">
+    <name>ФормаСписка</name>
+    <synonym>
+      <key>ru</key>
+      <value>Форма списка</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+</mdclass:Table>

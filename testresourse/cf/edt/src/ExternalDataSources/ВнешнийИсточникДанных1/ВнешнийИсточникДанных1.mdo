@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:ExternalDataSource xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="246bd4c6-7e75-42c3-9e9e-a7d1f7e0a9f1">
+  <producedTypes>
+    <managerType typeId="8f5521c9-0e43-409f-afef-3f96ed9865a3" valueTypeId="11c1078f-e7d4-4342-a990-045069ef7e66"/>
+    <tablesManagerType typeId="9e41e2ed-463d-402d-9e2b-9051e593c170" valueTypeId="3fb0356b-2d57-47fd-a99b-2f2882f3cf3c"/>
+    <cubesManagerType typeId="5b999007-8ce6-48f6-bd67-c03090290276" valueTypeId="afe5d0b1-d7a8-453f-825f-430827d811fd"/>
+  </producedTypes>
+  <name>ВнешнийИсточникДанных1</name>
+  <tables>ExternalDataSource.ВнешнийИсточникДанных1.Table.Таблица1</tables>
+  <tables>ExternalDataSource.ВнешнийИсточникДанных1.Table.Таблица2</tables>
+  <cubes>ExternalDataSource.ВнешнийИсточникДанных1.Cube.Куб1</cubes>
+  <functions uuid="cfeb4985-23b9-4030-add2-8f457c6b198a">
+    <name>Функция1</name>
+    <returnValue>true</returnValue>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>10</length>
+      </stringQualifiers>
+    </type>
+  </functions>
+</mdclass:ExternalDataSource>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Cube xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3a2f77a9-afc0-4f86-bc78-d0aa4dd2b7d3">
+  <producedTypes>
+    <managerType typeId="486c6e3a-ba31-4303-bb8b-b9c28cab93be" valueTypeId="ce874916-29e1-4976-ba5c-31bea995d69f"/>
+    <listType typeId="f7f03677-c134-4911-b685-d52b1523d3f2" valueTypeId="bd597840-4b5b-4fc3-a76f-5c3f7aae7a0d"/>
+    <recordManagerType typeId="5db21b18-57ff-454a-a23a-9bb4a4926605" valueTypeId="7554c383-4d2f-4825-9910-f631dd5e529f"/>
+    <recordSetType typeId="f2a1a14e-a90e-4675-b8f0-d6de5e97522d" valueTypeId="a34873ad-42a3-4daf-b479-2dd4dad8d8f2"/>
+    <recordType typeId="ad6b5e21-9033-4408-b17b-3d0eb148bdbc" valueTypeId="a8e20fca-72f3-43f9-8978-31c8ae1d4509"/>
+    <recordKeyType typeId="dbaaf71e-a6c9-40b1-89db-c508220d52fa" valueTypeId="2b9d7af1-6c7a-41e5-ba97-6e6512045c97"/>
+    <dimensionTablesManagerType typeId="f7ac6773-a64d-4883-80a9-65593a760539" valueTypeId="68803d8d-c09c-44fe-bcab-aa3751b54565"/>
+  </producedTypes>
+  <name>Куб1</name>
+  <parentDataSource>ExternalDataSource.ВнешнийИсточникДанных1</parentDataSource>
+  <nameInDataSource>cube</nameInDataSource>
+</mdclass:Cube>

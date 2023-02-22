@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Table xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="d9095578-9b98-4217-a4ca-ff35b787a0a6">
+  <producedTypes>
+    <refType typeId="3d1c2a0c-7727-4b75-92c5-0e591af37d2a" valueTypeId="9103eef2-3651-40af-9a0e-5b1cfa1986ad"/>
+    <listType typeId="243b7756-ec83-4249-a506-51b5edf5671a" valueTypeId="4002c33b-d680-4854-8ff6-77c2d85d9503"/>
+    <objectType typeId="bac525d7-a21d-4f28-81ab-27a9e6beac36" valueTypeId="8687adca-dc6c-4a4e-8e27-2620e2f2589d"/>
+    <managerType typeId="3e18ddc4-9ce9-4a29-ba8b-894a5eb348e5" valueTypeId="8a161381-6fdd-46b3-886e-5733fd1f7c08"/>
+    <recordManagerType typeId="82b86587-5236-4616-b127-1f38dfd6eb89" valueTypeId="b616de09-a4bb-48c4-b5ec-199c746f6e39"/>
+    <recordSetType typeId="98675b33-6e0e-4c5b-a01d-46327f433cbc" valueTypeId="13ae222a-9366-4c7f-a13d-a521b2e364e4"/>
+    <recordType typeId="19163a7f-6964-4235-9a5a-ae1046a0635c" valueTypeId="448a3bac-8ec0-4c4f-93d0-1ced1e1befbc"/>
+    <recordKeyType typeId="1f0065d8-868a-44e3-9655-6d27cf483325" valueTypeId="d4ed80c3-aa6d-4372-8c66-d1842d3aab40"/>
+  </producedTypes>
+  <name>Таблица2</name>
+  <parentDataSource>ExternalDataSource.ВнешнийИсточникДанных1</parentDataSource>
+  <nameInDataSource>table2</nameInDataSource>
+  <tableDataType>NonobjectData</tableDataType>
+  <unfilledParentValue xsi:type="core:UndefinedValue"/>
+  <useStandardCommands>true</useStandardCommands>
+  <editType>InDialog</editType>
+  <tableFields uuid="276571ed-b92a-4e78-83cb-16b14c87f639">
+    <name>Поле1</name>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>10</length>
+      </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:StringValue">
+      <value></value>
+    </fillValue>
+    <nameInDataSource>column1</nameInDataSource>
+    <allowNull>true</allowNull>
+  </tableFields>
+</mdclass:Table>
