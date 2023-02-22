@@ -1,32 +1,24 @@
 package bslparser
 
 import (
-	"fmt"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
 )
 
-func Test_real(t *testing.T) {
+func Test_big(t *testing.T) {
 
-	path := "C:/Users/a.sosnoviy.VOSHOD/go/dev/go1cover/testresourse/cf/designer"
-	p := New()
-	fillse, _ := p.Files(path)
-	p.Parse(fillse)
-
-	for k, v := range p.LinesToCover {
-		fmt.Println(k, v)
-	}
+	New().Parsefile("./tests/bigModule.bsl")
 
 }
 
 func Test_nofile(t *testing.T) {
 
 	defer func() {
-        if r := recover(); r != nil {
-           t.Fail()
-        }
-    }()
+		if r := recover(); r != nil {
+			t.Fail()
+		}
+	}()
 
 	p := New()
 	p.Parsefile("nofilebsl")

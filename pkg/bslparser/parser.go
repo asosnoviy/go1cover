@@ -1,14 +1,15 @@
 package bslparser
 
 import (
+	"fmt"
 	"log"
 	"os"
 	"path/filepath"
 	"sort"
 	"sync"
 
-	"github.com/antlr/antlr4/runtime/Go/antlr/v4"
-	"github.com/asosnoviy/go1cover/pkg/bslparser/parser"
+	"github.com/antlr/antlr4/runtime/Go/antlr"
+	parser "github.com/asosnoviy/go1cover/pkg/bslparser/antlrparser"
 )
 
 type Bslparser struct {
@@ -46,6 +47,7 @@ func (p *Bslparser) Parse(files []string) error {
 	}
 
 	p.wg.Wait()
+	log.Println("Parse complete")
 	return nil
 }
 
@@ -73,17 +75,35 @@ func (p *Bslparser) LinesCount() int {
 func (p *Bslparser) parsefile(path string) {
 	_, err := os.Stat(path)
 	if err != nil {
+		p.wg.Done()
 		log.Println("file not found:", path)
 		return
 	}
+
+	// log.Printf("Start parse: %s", path)
+
+	// timeStart := time.Now()
 	is, _ := antlr.NewFileStream(path)
 	lexer := parser.NewBSLLexer(is)
 	stream := antlr.NewCommonTokenStream(lexer, antlr.TokenDefaultChannel)
+	stream.Fill()
 	parser := parser.NewBSLParser(stream)
 	parser.RemoveErrorListeners()
-	parser.Interpreter.SetPredictionMode(antlr.PredictionModeSLL)
+	parser.AddErrorListener(antlr.NewDiagnosticErrorListener(true))
+	// parser.SetErrorHandler(antlr.NewBailErrorStrategy())
+	parser.GetInterpreter().SetPredictionMode(antlr.PredictionModeSLL)
+	parser.BuildParseTrees = true
+
+	defer func() {
+		if r := recover(); r != nil {
+			p.wg.Done()
+			fmt.Println("Error parse: ", path, r)
+			return
+		}
+	}()
 
 	ast := parser.File()
+	// log.Println(path)
 	lines := getLines(ast)
 	keys := make([]int, 0)
 	for k := range lines {
@@ -93,5 +113,9 @@ func (p *Bslparser) parsefile(path string) {
 	p.Mutex.Lock()
 	p.LinesToCover[path] = keys
 	p.Mutex.Unlock()
+
+	// timeStop := time.Now()
+	// log.Printf("Stop parse: %s time %s", path, timeStop.Sub(timeStart))
+
 	p.wg.Done()
 }

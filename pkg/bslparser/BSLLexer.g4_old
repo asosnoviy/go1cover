@@ -20,7 +20,6 @@
  * License along with BSL Parser.
  */
 lexer grammar BSLLexer;
-options { caseInsensitive = true; }
 
 channels {
     // для хранения удаленного блока
@@ -57,24 +56,24 @@ AMPERSAND: '&' -> pushMode(ANNOTATION_MODE);
 PREPROC_DELETE
     : '#' [ \t]*
     (
-          '\u0423\u0414\u0410\u041b\u0415\u041d\u0418\u0415'
-        | 'DELETE'
+          RU_U RU_D RU_A RU_L RU_E RU_N RU_I RU_E
+        | D E L E T E
     )
     -> pushMode(PREPROC_DELETE_MODE), channel(PREPROC_DELETE_CHANNEL)
     ;
 PREPROC_INSERT
     : '#' [ \t]*
     (
-          '\u0412\u0421\u0422\u0410\u0412\u041a\u0410'
-        | 'INSERT'
+          RU_V RU_S RU_T RU_A RU_V RU_K RU_A
+        | I N S E R T
     )
     -> channel(HIDDEN)
     ;
 PREPROC_ENDINSERT
     : '#' [ \t]*
     (
-          '\u041a\u041e\u041d\u0415\u0426\u0412\u0421\u0422\u0410\u0412\u041a\u0418'
-        | 'ENDINSERT'
+          RU_K RU_O RU_N RU_E RU_C RU_V RU_S RU_T RU_A RU_V RU_K RU_I
+        | E N D I N S E R T
     )
     -> channel(HIDDEN)
     ;
@@ -84,82 +83,82 @@ fragment SQUOTE: '\'';
 BAR: '|';
 TILDA: '~' -> pushMode(LABEL_MODE);
 
-// fragment А: '\u0410' | '\u0430';
-// fragment Б: '\u0411' | '\u0431';
-// fragment В: '\u0412' | '\u0432';
-// fragment Г: '\u0413' | '\u0433';
-// fragment Д: '\u0414' | '\u0434';
-// fragment Е: '\u0401' | '\u0451';
-// fragment Е: '\u0415' | '\u0435';
-// fragment Ж: '\u0416' | '\u0436';
-// fragment З: '\u0417' | '\u0437';
-// fragment И: '\u0418' | '\u0438';
-// fragment Й: '\u0419' | '\u0439';
-// fragment К: '\u041a' | '\u043a';
-// fragment Л: '\u041b' | '\u043b';
-// fragment М: '\u041c' | '\u043c';
-// fragment Н: '\u041d' | '\u043d';
-// fragment О: '\u041e' | '\u043e';
-// fragment П: '\u041f' | '\u043f';
-// fragment Р: '\u0420' | '\u0440';
-// fragment С: '\u0421' | '\u0441';
-// fragment Т: '\u0422' | '\u0442';
-// fragment У: '\u0423' | '\u0443';
-// fragment Ф:'\u0424' | '\u0444';
-// fragment Х:'\u0425' | '\u0445';
-// fragment Ц: '\u0426' | '\u0446';
-// fragment Ч: '\u0427' | '\u0447';
-// fragment Ш: '\u0428' | '\u0448';
-// fragment Щ: '\u0429' | '\u0449';
-// fragment Ъ:'\u042a' | '\u044a';
-// fragment Ы: '\u042b' | '\u044b';
-// fragment Ь: '\u042c' | '\u044c';
-// fragment Э:'\u042d' | '\u044d';
-// fragment Ю: '\u042e' | '\u044e';
-// fragment Я: '\u042f' | '\u044f';
-// fragment A: 'A' | 'a';
-// fragment B: 'B' | 'b';
-// fragment C: 'C' | 'c';
-// fragment D: 'D' | 'd';
-// fragment I: 'I' | 'i';
-// fragment E: 'E' | 'e';
-// fragment F: 'F' | 'f';
-// fragment G: 'G' | 'g';
-// fragment U: 'U' | 'u';
-// fragment K: 'K' | 'k';
-// fragment L: 'L' | 'l';
-// fragment M: 'M' | 'm';
-// fragment N: 'N' | 'n';
-// fragment O: 'O' | 'o';
-// fragment P: 'P' | 'p';
-// fragment R: 'R' | 'r';
-// fragment S: 'S' | 's';
-// fragment T: 'T' | 't';
-// fragment V: 'V' | 'v';
-// fragment H: 'H' | 'h';
-// fragment W: 'W' | 'w';
-// fragment X: 'X' | 'x';
-// fragment Y: 'Y' | 'y';
+fragment RU_A: '\u0410' | '\u0430';
+fragment RU_B: '\u0411' | '\u0431';
+fragment RU_V: '\u0412' | '\u0432';
+fragment RU_G: '\u0413' | '\u0433';
+fragment RU_D: '\u0414' | '\u0434';
+fragment RU_YO: '\u0401' | '\u0451';
+fragment RU_E: '\u0415' | '\u0435';
+fragment RU_ZH: '\u0416' | '\u0436';
+fragment RU_Z: '\u0417' | '\u0437';
+fragment RU_I: '\u0418' | '\u0438';
+fragment RU_J: '\u0419' | '\u0439';
+fragment RU_K: '\u041a' | '\u043a';
+fragment RU_L: '\u041b' | '\u043b';
+fragment RU_M: '\u041c' | '\u043c';
+fragment RU_N: '\u041d' | '\u043d';
+fragment RU_O: '\u041e' | '\u043e';
+fragment RU_P: '\u041f' | '\u043f';
+fragment RU_R: '\u0420' | '\u0440';
+fragment RU_S: '\u0421' | '\u0441';
+fragment RU_T: '\u0422' | '\u0442';
+fragment RU_U: '\u0423' | '\u0443';
+fragment RU_F:'\u0424' | '\u0444';
+fragment RU_H:'\u0425' | '\u0445';
+fragment RU_C: '\u0426' | '\u0446';
+fragment RU_CH: '\u0427' | '\u0447';
+fragment RU_SH: '\u0428' | '\u0448';
+fragment RU_SCH: '\u0429' | '\u0449';
+fragment RU_SOLID_SIGN:'\u042a' | '\u044a';
+fragment RU_Y: '\u042b' | '\u044b';
+fragment RU_SOFT_SIGN: '\u042c' | '\u044c';
+fragment RU_EH:'\u042d' | '\u044d';
+fragment RU_YU: '\u042e' | '\u044e';
+fragment RU_YA: '\u042f' | '\u044f';
+fragment A: 'A' | 'a';
+fragment B: 'B' | 'b';
+fragment C: 'C' | 'c';
+fragment D: 'D' | 'd';
+fragment I: 'I' | 'i';
+fragment E: 'E' | 'e';
+fragment F: 'F' | 'f';
+fragment G: 'G' | 'g';
+fragment U: 'U' | 'u';
+fragment K: 'K' | 'k';
+fragment L: 'L' | 'l';
+fragment M: 'M' | 'm';
+fragment N: 'N' | 'n';
+fragment O: 'O' | 'o';
+fragment P: 'P' | 'p';
+fragment R: 'R' | 'r';
+fragment S: 'S' | 's';
+fragment T: 'T' | 't';
+fragment V: 'V' | 'v';
+fragment H: 'H' | 'h';
+fragment W: 'W' | 'w';
+fragment X: 'X' | 'x';
+fragment Y: 'Y' | 'y';
 
 // literals
 TRUE
     :
-     '\u0418\u0421\u0422\u0418\u041d\u0410'
-    | 'TRUE'
+     RU_I RU_S RU_T RU_I RU_N RU_A
+    | T R U E
     ;
 FALSE
     :
-    '\u041b\u041e\u0416\u042c'
-    | 'FALSE'
+     RU_L RU_O RU_ZH RU_SOFT_SIGN
+    | F A L S E
     ;
 UNDEFINED
     :
-     '\u041d\u0415\u041e\u041f\u0420\u0415\u0414\u0415\u041b\u0415\u041d\u041e'
-    | 'UNDEFINED'
+     RU_N RU_E RU_O RU_P RU_R RU_E RU_D RU_E RU_L RU_E RU_N RU_O
+    | U N D E F I N E D
     ;
 NULL
     :
-    'NULL'
+    N U L L
     ;
 DECIMAL: DIGIT+;
 DATETIME: SQUOTE(~['\n\r])*SQUOTE?; // TODO: Честная регулярка
@@ -173,175 +172,175 @@ STRINGPART: BAR (~[\r\n"] | '""')*;
 // keywords
 PROCEDURE_KEYWORD
     :
-     '\u041f\u0440\u043e\u0446\u0435\u0434\u0443\u0440\u0430'
-    | 'PROCEDURE'
+     RU_P RU_R RU_O RU_C RU_E RU_D RU_U RU_R RU_A
+    | P R O C E D U R E
     ;
 FUNCTION_KEYWORD
     :
-    '\u0424\u0423\u041d\u041a\u0426\u0418\u042f'
-    |'FUNCTION'
+     RU_F RU_U RU_N RU_K RU_C RU_I RU_YA
+    | F U N C T I O N
     ;
 ENDPROCEDURE_KEYWORD
-    :'\u041a\u043e\u043d\u0435\u0446\u041f\u0440\u043e\u0446\u0435\u0434\u0443\u0440\u044b'
-    | 'ENDPROCEDURE'
+    :(RU_K RU_O RU_N RU_E RU_C RU_P RU_R RU_O RU_C RU_E RU_D RU_U RU_R RU_Y
+    | E N D P R O C E D U R E)
     ;
 ENDFUNCTION_KEYWORD
-    :'\u041a\u041e\u041d\u0415\u0426\u0424\u0423\u041d\u041a\u0426\u0418\u0418'
-    |'ENDFUNCTION'
+    :(RU_K RU_O RU_N RU_E RU_C RU_F RU_U RU_N RU_K RU_C RU_I RU_I
+    | E N D F U N C T I O N)
     ;
 EXPORT_KEYWORD
     :
-    '\u042d\u041a\u0421\u041f\u041e\u0420\u0422'
-    |'EXPORT'
+     RU_EH RU_K RU_S RU_P RU_O RU_R RU_T
+    | E X P O R T
     ;
 VAL_KEYWORD
     :
-    '\u0417\u041d\u0410\u0427'
-    |'VAL'
+     RU_Z RU_N RU_A RU_CH
+    | V A L
     ;
 ENDIF_KEYWORD
     :
-    '\u041a\u041e\u041d\u0415\u0426\u0415\u0421\u041b\u0418'
-    |'ENDIF'
+     RU_K RU_O RU_N RU_E RU_C RU_E RU_S RU_L RU_I
+    | E N D I F
     ;
 ENDDO_KEYWORD
     :
-    '\u041a\u041e\u041d\u0415\u0426\u0426\u0418\u041a\u041b\u0410'
-    |'ENDDO'
+     RU_K RU_O RU_N RU_E RU_C RU_C RU_I RU_K RU_L RU_A
+    | E N D D O
     ;
 IF_KEYWORD
     :
-    '\u0415\u0421\u041b\u0418'
-    |'IF'
+     RU_E RU_S RU_L RU_I
+    | I F
     ;
 ELSIF_KEYWORD
     :
-    '\u0418\u041d\u0410\u0427\u0415\u0415\u0421\u041b\u0418'
-    |'ELSIF'
+     RU_I RU_N RU_A RU_CH RU_E RU_E RU_S RU_L RU_I
+    | E L S I F
     ;
 ELSE_KEYWORD
     :
-    '\u0418\u041d\u0410\u0427\u0415'
-    |'ELSE'
+     RU_I RU_N RU_A RU_CH RU_E
+    | E L S E
     ;
 THEN_KEYWORD
     :
-    '\u0422\u041e\u0413\u0414\u0410'
-    |'THEN'
+     RU_T RU_O RU_G RU_D RU_A
+    | T H E N
     ;
 WHILE_KEYWORD
     :
-    '\u041f\u041e\u041a\u0410'
-    |'WHILE'
+     RU_P RU_O RU_K RU_A
+    | W H I L E
     ;
 DO_KEYWORD
     :
-    '\u0426\u0418\u041a\u041b'
-    |'DO'
+     RU_C RU_I RU_K RU_L
+    | D O
     ;
 FOR_KEYWORD
     :
-    '\u0414\u041b\u042f'
-    |'FOR'
+     RU_D RU_L RU_YA
+    | F O R
     ;
 TO_KEYWORD
     :
-    '\u041f\u041e'
-    |'TO'
+     RU_P RU_O
+    | T O
     ;
 EACH_KEYWORD
     :
-    '\u041a\u0410\u0416\u0414\u041e\u0413\u041e'
-    |'EACH'
+     RU_K RU_A RU_ZH RU_D RU_O RU_G RU_O
+    | E A C H
     ;
 IN_KEYWORD
     :
-    '\u0418\u0417'
-    |'IN'
+     RU_I RU_Z
+    | I N
     ;
 TRY_KEYWORD
     :
-    '\u041f\u041e\u041f\u042b\u0422\u041a\u0410'
-    |'TRY'
+     RU_P RU_O RU_P RU_Y RU_T RU_K RU_A
+    | T R Y
     ;
 EXCEPT_KEYWORD
     :
-    '\u0418\u0421\u041a\u041b\u042e\u0427\u0415\u041d\u0418\u0415'
-    |'EXCEPT'
+     RU_I RU_S RU_K RU_L RU_YU RU_CH RU_E RU_N RU_I RU_E
+    | E X C E P T
     ;
 ENDTRY_KEYWORD
     :
-    '\u041a\u041e\u041d\u0415\u0426\u041f\u041e\u041f\u042b\u0422\u041a\u0418'
-    |'ENDTRY'
+     RU_K RU_O RU_N RU_E RU_C RU_P RU_O RU_P RU_Y RU_T RU_K RU_I
+    | E N D T R Y
     ;
 RETURN_KEYWORD
     :
-    '\u0412\u041e\u0417\u0412\u0420\u0410\u0422'
-    |'RETURN'
+     RU_V RU_O RU_Z RU_V RU_R RU_A RU_T
+    | R E T U R N
     ;
 CONTINUE_KEYWORD
     :
-    '\u041f\u0420\u041e\u0414\u041e\u041b\u0416\u0418\u0422\u042c'
-    |'CONTINUE'
+     RU_P RU_R RU_O RU_D RU_O RU_L RU_ZH RU_I RU_T RU_SOFT_SIGN
+    | C O N T I N U E
     ;
 RAISE_KEYWORD
     :
-    '\u0412\u042b\u0417\u0412\u0410\u0422\u042c\u0418\u0421\u041a\u041b\u042e\u0427\u0415\u041d\u0418\u0415'
-    |'RAISE'
+     RU_V RU_Y RU_Z RU_V RU_A RU_T RU_SOFT_SIGN RU_I RU_S RU_K RU_L RU_YU RU_CH RU_E RU_N RU_I RU_E
+    | R A I S E
     ;
 VAR_KEYWORD
     :
-    '\u041f\u0415\u0420\u0415\u041c'
-    |'VAR'
+     RU_P RU_E RU_R RU_E RU_M
+    | V A R
     ;
 NOT_KEYWORD
     :
-    '\u041d\u0415'
-    |'NOT'
+     RU_N RU_E
+    | N O T
     ;
 OR_KEYWORD
     :
-    '\u0418\u041b\u0418'
-    |'OR'
+     RU_I RU_L RU_I
+    | O R
     ;
 AND_KEYWORD
     :
-    '\u0418'
-    |'AND'
+     RU_I
+    | A N D
     ;
 NEW_KEYWORD
     :
-    '\u041d\u041e\u0412\u042b\u0419'
-    |'NEW'
+     RU_N RU_O RU_V RU_Y RU_J
+    | N E W
     ;
 GOTO_KEYWORD
     :
-    '\u041f\u0415\u0420\u0415\u0419\u0422\u0418'
-    |'GOTO'
+     RU_P RU_E RU_R RU_E RU_J RU_T RU_I
+    | G O T O
     ;
 BREAK_KEYWORD
     :
-    '\u041f\u0420\u0415\u0420\u0412\u0410\u0422\u042c'
-    |'BREAK'
+     RU_P RU_R RU_E RU_R RU_V RU_A RU_T RU_SOFT_SIGN
+    | B R E A K
     ;
 EXECUTE_KEYWORD
     :
-    '\u0412\u042b\u041f\u041e\u041b\u041d\u0418\u0422\u042c'
-    |'EXECUTE'
+     RU_V RU_Y RU_P RU_O RU_L RU_N RU_I RU_T RU_SOFT_SIGN
+    | E X E C U T E
     ;
 ADDHANDLER_KEYWORD
     :
-    '\u0414\u041e\u0411\u0410\u0412\u0418\u0422\u042c\u041e\u0411\u0420\u0410\u0411\u041e\u0422\u0427\u0418\u041a'
-    |'ADDHANDLER'
+     RU_D RU_O RU_B RU_A RU_V RU_I RU_T RU_SOFT_SIGN RU_O RU_B RU_R RU_A RU_B RU_O RU_T RU_CH RU_I RU_K
+    | A D D H A N D L E R
     ;
 REMOVEHANDLER_KEYWORD
     :
-    '\u0423\u0414\u0410\u041b\u0418\u0422\u042c\u041e\u0411\u0420\u0410\u0411\u041e\u0422\u0427\u0418\u041a'
-    |'REMOVEHANDLER'
+     RU_U RU_D RU_A RU_L RU_I RU_T RU_SOFT_SIGN RU_O RU_B RU_R RU_A RU_B RU_O RU_T RU_CH RU_I RU_K
+    | R E M O V E H A N D L E R
     ;
 ASYNC_KEYWORD
-    : ('\u0410\u0421\u0418\u041d\u0425'
-    |'ASYNC') -> pushMode(ASYNC_MODE)
+    : (RU_A RU_S RU_I RU_N RU_H
+    | A S Y N C) -> pushMode(ASYNC_MODE)
     ;
 
 fragment LETTER: [\p{Letter}] | '_';
@@ -359,163 +358,163 @@ PREPROC_STRING: '"' (~["\n\r])* '"';
 
 PREPROC_USE_KEYWORD
     :
-    ('\u0418\u0421\u041f\u041e\u041b\u042c\u0417\u041e\u0412\u0410\u0422\u042c'
-    |'USE') -> pushMode(USE_MODE);
+    (RU_I RU_S RU_P RU_O RU_L RU_SOFT_SIGN RU_Z RU_O RU_V RU_A RU_T RU_SOFT_SIGN
+    | U S E) -> pushMode(USE_MODE);
 
 PREPROC_REGION
     :
-    ('\u041e\u0411\u041b\u0410\u0421\u0422\u042c'
-    |'REGION' ) -> pushMode(REGION_MODE)
+    ( RU_O RU_B RU_L RU_A RU_S RU_T RU_SOFT_SIGN
+    | R E G I O N ) -> pushMode(REGION_MODE)
     ;
 PREPROC_END_REGION
     :
-    ('\u041a\u043e\u043d\u0435\u0446\u041e\u0431\u043b\u0430\u0441\u0442\u0438'
-    |'ENDREGION' )
+    ( RU_K RU_O RU_N RU_E RU_C RU_O RU_B RU_L RU_A RU_S RU_T RU_I
+    | E N D R E G I O N )
     ;
 
 PREPROC_NOT_KEYWORD
     :
-     '\u041d\u0415'
-    |'NOT'
+      RU_N RU_E
+    | N O T
     ;
 PREPROC_OR_KEYWORD
     :
-     '\u0418\u041b\u0418'
-    |'OR'
+      RU_I RU_L RU_I
+    | O R
     ;
 PREPROC_AND_KEYWORD
     :
-     '\u0418'
-    |'AND'
+      RU_I
+    | A N D
     ;
 
 PREPROC_IF_KEYWORD
     :
-     '\u0415\u0421\u041b\u0418'
-    |'IF'
+      RU_E RU_S RU_L RU_I
+    | I F
     ;
 PREPROC_THEN_KEYWORD
     :
-     '\u0422\u041e\u0413\u0414\u0410'
-    |'THEN'
+      RU_T RU_O RU_G RU_D RU_A
+    | T H E N
     ;
 PREPROC_ELSIF_KEYWORD
     :
-     '\u0418\u041d\u0410\u0427\u0415\u0415\u0421\u041b\u0418'
-    |'ELSIF'
+      RU_I RU_N RU_A RU_CH RU_E RU_E RU_S RU_L RU_I
+    | E L S I F
     ;
 PREPROC_ENDIF_KEYWORD
     :
-     '\u041a\u041e\u041d\u0415\u0426\u0415\u0421\u041b\u0418'
-    |'ENDIF'
+      RU_K RU_O RU_N RU_E RU_C RU_E RU_S RU_L RU_I
+    | E N D I F
     ;
 PREPROC_ELSE_KEYWORD
     :
-     '\u0418\u041d\u0410\u0427\u0415'
-    |'ELSE'
+      RU_I RU_N RU_A RU_CH RU_E
+    | E L S E
     ;
 
 PREPROC_MOBILEAPPCLIENT_SYMBOL
     :
-     '\u041c\u041e\u0411\u0418\u041b\u042c\u041d\u041e\u0415'
-     '\u041f\u0420\u0418\u041b\u041e\u0416\u0415\u041d\u0418\u0415'
-     '\u041a\u041b\u0418\u0415\u041d\u0422'
-    |'MOBILE'
-     'APP'
-     'CLIENT'
+      RU_M RU_O RU_B RU_I RU_L RU_SOFT_SIGN RU_N RU_O RU_E
+      RU_P RU_R RU_I RU_L RU_O RU_ZH RU_E RU_N RU_I RU_E
+      RU_K RU_L RU_I RU_E RU_N RU_T
+    | M O B I L E
+      A P P
+      C L I E N T
     ;
 PREPROC_MOBILEAPPSERVER_SYMBOL
     :
-     '\u041c\u041e\u0411\u0418\u041b\u042c\u041d\u041e\u0415'
-     '\u041f\u0420\u0418\u041b\u041e\u0416\u0415\u041d\u0418\u0415'
-     '\u0421\u0415\u0420\u0412\u0415\u0420'
-    |'MOBILE'
-     'APP'
-     'SERVER'
+      RU_M RU_O RU_B RU_I RU_L RU_SOFT_SIGN RU_N RU_O RU_E
+      RU_P RU_R RU_I RU_L RU_O RU_ZH RU_E RU_N RU_I RU_E
+      RU_S RU_E RU_R RU_V RU_E RU_R
+    | M O B I L E
+      A P P
+      S E R V E R
     ;
 PREPROC_MOBILECLIENT_SYMBOL
     :
-     '\u041c\u041e\u0411\u0418\u041b\u042c\u041d\u042b\u0419'
-     '\u041a\u041b\u0418\u0415\u041d\u0422'
-    |'MOBILE'
-     'CLIENT'
+      RU_M RU_O RU_B RU_I RU_L RU_SOFT_SIGN RU_N RU_Y RU_J
+      RU_K RU_L RU_I RU_E RU_N RU_T
+    | M O B I L E
+      C L I E N T
     ;
 PREPROC_THICKCLIENTORDINARYAPPLICATION_SYMBOL
     :
-    '\u0422\u041e\u041b\u0421\u0422\u042b\u0419'
-     '\u041a\u041b\u0418\u0415\u041d\u0422'
-     '\u041e\u0411\u042b\u0427\u041d\u041e\u0415'
-     '\u041f\u0420\u0418\u041b\u041e\u0416\u0415\u041d\u0418\u0415'
-    |'THICK'
-     'CLIENT'
-     'ORDINARY'
-     'APPLICATION'
+      RU_T RU_O RU_L RU_S RU_T RU_Y RU_J
+      RU_K RU_L RU_I RU_E RU_N RU_T
+      RU_O RU_B RU_Y RU_CH RU_N RU_O RU_E
+      RU_P RU_R RU_I RU_L RU_O RU_ZH RU_E RU_N RU_I RU_E
+    | T H I C K
+      C L I E N T
+      O R D I N A R Y
+      A P P L I C A T I O N
     ;
 PREPROC_THICKCLIENTMANAGEDAPPLICATION_SYMBOL
     :
-     '\u0422\u041e\u041b\u0421\u0422\u042b\u0419'
-     '\u041a\u041b\u0418\u0415\u041d\u0422'
-     '\u0423\u041f\u0420\u0410\u0412\u041b\u042f\u0415\u041c\u041e\u0415'
-     '\u041f\u0420\u0418\u041b\u041e\u0416\u0415\u041d\u0418\u0415'
-    |'THICK'
-     'CLIENT'
-     'MANAGED'
-     'APPLICATION'
+      RU_T RU_O RU_L RU_S RU_T RU_Y RU_J
+      RU_K RU_L RU_I RU_E RU_N RU_T
+      RU_U RU_P RU_R RU_A RU_V RU_L RU_YA RU_E RU_M RU_O RU_E
+      RU_P RU_R RU_I RU_L RU_O RU_ZH RU_E RU_N RU_I RU_E
+    | T H I C K
+      C L I E N T
+      M A N A G E D
+      A P P L I C A T I O N
     ;
 PREPROC_EXTERNALCONNECTION_SYMBOL
     :
-     '\u0412\u041d\u0415\u0428\u041d\u0415\u0415'
-     '\u0421\u041e\u0415\u0414\u0418\u041d\u0415\u041d\u0418\u0415'
-    |'EXTERNAL'
-     'CONNECTION'
+      RU_V RU_N RU_E RU_SH RU_N RU_E RU_E
+      RU_S RU_O RU_E RU_D RU_I RU_N RU_E RU_N RU_I RU_E
+    | E X T E R N A L
+      C O N N E C T I O N
     ;
 PREPROC_THINCLIENT_SYMBOL
     :
-     '\u0422\u041e\u041d\u041a\u0418\u0419'
-     '\u041a\u041b\u0418\u0415\u041d\u0422'
-    |'THIN'
-     'CLIENT'
+      RU_T RU_O RU_N RU_K RU_I RU_J
+      RU_K RU_L RU_I RU_E RU_N RU_T
+    | T H I N
+      C L I E N T
     ;
 PREPROC_WEBCLIENT_SYMBOL
     :
-     '\u0412\u0415\u0411'
-     '\u041a\u041b\u0418\u0415\u041d\u0422'
-    |'WEB'
-     'CLIENT'
+      RU_V RU_E RU_B
+      RU_K RU_L RU_I RU_E RU_N RU_T
+    | W E B
+      C L I E N T
     ;
 PREPROC_ATCLIENT_SYMBOL
     :
-     '\u041d\u0410\u041a\u041b\u0418\u0415\u041d\u0422\u0415'
-    |'ATCLIENT'
+      RU_N RU_A RU_K RU_L RU_I RU_E RU_N RU_T RU_E
+    | A T C L I E N T
     ;
 PREPROC_CLIENT_SYMBOL
     :
-     '\u041a\u041b\u0418\u0415\u041d\u0422'
-    |'CLIENT'
+      RU_K RU_L RU_I RU_E RU_N RU_T
+    | C L I E N T
     ;
 PREPROC_ATSERVER_SYMBOL
     :
-     '\u041d\u0430\u0421\u0435\u0440\u0432\u0435\u0440\u0435'
-    |'ATSERVER'
+      RU_N RU_A RU_S RU_E RU_R RU_V RU_E RU_R RU_E
+    | A T S E R V E R
     ;
 PREPROC_SERVER_SYMBOL
     :
-     '\u0421\u0415\u0420\u0412\u0415\u0420'
-    |'SERVER'
+      RU_S RU_E RU_R RU_V RU_E RU_R
+    | S E R V E R
     ;
 PREPROC_MOBILE_STANDALONE_SERVER
     :
-     '\u041c\u041e\u0411\u0418\u041b\u042c\u041d\u042b\u0419'
-     '\u0410\u0412\u0422\u041e\u041d\u041e\u041c\u041d\u042b\u0419'
-     '\u0421\u0415\u0420\u0412\u0415\u0420'
-    |'MOBILESTANDALONESERVER'
+      RU_M RU_O RU_B RU_I RU_L RU_SOFT_SIGN RU_N RU_Y RU_J
+      RU_A RU_V RU_T RU_O RU_N RU_O RU_M RU_N RU_Y RU_J
+      RU_S RU_E RU_R RU_V RU_E RU_R
+    | M O B I L E S T A N D A L O N E S E R V E R
     ;
 
-PREPROC_LINUX   :'LINUX';
-PREPROC_WINDOWS :'WINDOWS';
-PREPROC_MACOS   :'MACOS';
+PREPROC_LINUX   : L I N U X;
+PREPROC_WINDOWS : W I N D O W S;
+PREPROC_MACOS   : M A C O S;
 
-PREPROC_IDENTIFIER :LETTER (LETTER |DIGIT )*;
+PREPROC_IDENTIFIER : LETTER ( LETTER | DIGIT )*;
 
 PREPROC_WHITE_SPACE: [ \t\f]+ -> channel(HIDDEN), type(WHITE_SPACE);
 PREPROC_LINE_COMMENT: '//' ~[\r\n]* -> channel(HIDDEN), type(LINE_COMMENT);
@@ -527,67 +526,67 @@ mode ANNOTATION_MODE;
 
 ANNOTATION_ATSERVERNOCONTEXT_SYMBOL
     : (
-     '\u041d\u0410\u0421\u0415\u0420\u0412\u0415\u0420\u0415'
-     '\u0411\u0415\u0417\u041a\u041e\u041d\u0422\u0415\u041a\u0421\u0422\u0410'
-    |'ATSERVER'
-     'NOCONTEXT'
+      RU_N RU_A RU_S RU_E RU_R RU_V RU_E RU_R RU_E
+      RU_B RU_E RU_Z RU_K RU_O RU_N RU_T RU_E RU_K RU_S RU_T RU_A
+    | A T S E R V E R
+      N O C O N T E X T
     ) -> popMode
     ;
 
 ANNOTATION_ATCLIENTATSERVERNOCONTEXT_SYMBOL
     : (
-     '\u041d\u0410\u041a\u041b\u0418\u0415\u041d\u0422\u0415'
-     '\u041d\u0410\u0421\u0415\u0420\u0412\u0415\u0420\u0415'
-     '\u0411\u0415\u0417\u041a\u041e\u041d\u0422\u0415\u041a\u0421\u0422\u0410'
-    |'ATCLIENT'
-     'ATSERVER'
-     'NOCONTEXT'
+      RU_N RU_A RU_K RU_L RU_I RU_E RU_N RU_T RU_E
+      RU_N RU_A RU_S RU_E RU_R RU_V RU_E RU_R RU_E
+      RU_B RU_E RU_Z RU_K RU_O RU_N RU_T RU_E RU_K RU_S RU_T RU_A
+    | A T C L I E N T
+      A T S E R V E R
+      N O C O N T E X T
     ) -> popMode
     ;
 
 ANNOTATION_ATCLIENTATSERVER_SYMBOL
     : (
-     '\u041d\u0410\u041a\u041b\u0418\u0415\u041d\u0422\u0415'
-     '\u041d\u0410\u0421\u0415\u0420\u0412\u0415\u0420\u0415'
-    |'ATCLIENT'
-     'ATSERVER'
+      RU_N RU_A RU_K RU_L RU_I RU_E RU_N RU_T RU_E
+      RU_N RU_A RU_S RU_E RU_R RU_V RU_E RU_R RU_E
+    | A T C L I E N T
+      A T S E R V E R
     ) -> popMode
     ;
 
 ANNOTATION_ATCLIENT_SYMBOL
     : (
-     '\u041d\u0410\u041a\u041b\u0418\u0415\u041d\u0422\u0415'
-    |'ATCLIENT'
+      RU_N RU_A RU_K RU_L RU_I RU_E RU_N RU_T RU_E
+    | A T C L I E N T
     ) -> popMode
     ;
 
 ANNOTATION_ATSERVER_SYMBOL
-    : ('\u041d\u0410\u0421\u0415\u0420\u0412\u0415\u0420\u0415'
-    |'ATSERVER'
+    : ( RU_N RU_A RU_S RU_E RU_R RU_V RU_E RU_R RU_E
+    | A T S E R V E R
     ) -> popMode
     ;
 
 ANNOTATION_BEFORE_SYMBOL
-    : ('\u041f\u0415\u0420\u0415\u0414'
-    |'BEFORE'
+    : ( RU_P RU_E RU_R RU_E RU_D
+    | B E F O R E
     ) -> popMode
     ;
 
 ANNOTATION_AFTER_SYMBOL
-    : ('\u041f\u041e\u0421\u041b\u0415'
-    |'AFTER'
+    : ( RU_P RU_O RU_S RU_L RU_E
+    | A F T E R
     ) -> popMode
     ;
 
 ANNOTATION_AROUND_SYMBOL
-    : ('\u0412\u041c\u0415\u0421\u0422\u041e'
-    |'AROUND'
+    : ( RU_V RU_M RU_E RU_S RU_T RU_O
+    | A R O U N D
     ) -> popMode
     ;
 
 ANNOTATION_CHANGEANDVALIDATE_SYMBOL
-    : ('\u0418\u0417\u041c\u0415\u041d\u0415\u041d\u0418\u0415\u0418\u041a\u041e\u041d\u0422\u0420\u041e\u041b\u042c'
-    |'CHANGEANDVALIDATE'
+    : (  RU_I RU_Z RU_M RU_E RU_N RU_E RU_N RU_I RU_E RU_I RU_K RU_O RU_N RU_T RU_R RU_O RU_L RU_SOFT_SIGN
+    | C H A N G E A N D V A L I D A T E
     ) -> popMode
     ;
 
@@ -641,8 +640,8 @@ mode PREPROC_DELETE_MODE;
 PREPROC_ENDDELETE
     : '#' [ \t]*
     (
-         '\u041a\u041e\u041d\u0415\u0426\u0423\u0414\u0410\u041b\u0415\u041d\u0418\u042f'
-        |'ENDDELETE'
+          RU_K RU_O RU_N RU_E RU_C RU_U RU_D RU_A RU_L RU_E RU_N RU_I RU_YA
+        | E N D D E L E T E
     )
     -> popMode, channel(PREPROC_DELETE_CHANNEL);
 PREPROC_DELETE_WHITE_SPACE: [ \t\f]+ -> channel(HIDDEN), type(WHITE_SPACE);
@@ -736,8 +735,8 @@ Async_EXECUTE_KEYWORD: EXECUTE_KEYWORD -> type(EXECUTE_KEYWORD);
 Async_ADDHANDLER_KEYWORD: ADDHANDLER_KEYWORD -> type(ADDHANDLER_KEYWORD);
 Async_REMOVEHANDLER_KEYWORD: REMOVEHANDLER_KEYWORD -> type(REMOVEHANDLER_KEYWORD);
 AWAIT_KEYWORD
-    : ('\u0416\u0414\u0410\u0422\u042c'
-    |'AWAIT')
+    : (RU_ZH RU_D RU_A RU_T RU_SOFT_SIGN
+    | A W A I T)
     ;
 
 // всегда в конце мода

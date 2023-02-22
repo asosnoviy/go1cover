@@ -3,8 +3,8 @@ package bslparser
 import (
 	"strings"
 
-	"github.com/antlr/antlr4/runtime/Go/antlr/v4"
-	"github.com/asosnoviy/go1cover/pkg/bslparser/parser"
+	"github.com/antlr/antlr4/runtime/Go/antlr"
+	"github.com/asosnoviy/go1cover/pkg/bslparser/antlrparser"
 )
 
 func getLines(p parser.IFileContext) map[int]bool {
