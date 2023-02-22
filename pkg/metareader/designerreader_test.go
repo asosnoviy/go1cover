@@ -14,11 +14,11 @@ type metaobject struct {
 	folder string
 }
 
-var src = "../../testresourse/cf/designer"
-var reader *Metareader
+var src = "../../testresourse/cf/designer/src/"
+var reader *DesignerReader
 
 func init() {
-	reader = New(src)
+	reader = NewDesignerReader(src)
 	reader.Parse()
 	src, _ = filepath.Abs(src)
 }
@@ -137,7 +137,7 @@ func TestCommonForms(t *testing.T) {
 
 	module := Module{ModuleUuid: form.id, ModuleType: FormModule}
 	assert.Contains(t, meta, module)
-	assert.Equal(t, path.Join(src, form.folder, form.name,  "Ext", "Form", "Module.bsl"), meta[module])
+	assert.Equal(t, path.Join(src, form.folder, form.name, "Ext", "Form", "Module.bsl"), meta[module])
 }
 
 func TestCommonCommands(t *testing.T) {

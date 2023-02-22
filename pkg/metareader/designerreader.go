@@ -8,25 +8,31 @@ import (
 	"path/filepath"
 )
 
-type Metareader struct {
+type DesignerReader struct {
+	ReaderCommon
 	configuration *configuration
-	srcpath       string
-	coverData     coverData
 }
 
-func New(src string) *Metareader {
+type ReaderCommon struct {
+	srcpath   string
+	coverData coverData
+}
+
+func NewDesignerReader(src string) *DesignerReader {
 
 	path, _ := filepath.Abs(src)
-	metaReader := Metareader{
+	metaReader := DesignerReader{
 		configuration: &configuration{},
-		srcpath:       path,
-		coverData:     coverData{Data: make(map[Module]string)},
+		ReaderCommon: ReaderCommon{
+			srcpath:   path,
+			coverData: coverData{Data: make(map[Module]string)},
+		},
 	}
 
 	return &metaReader
 }
 
-func (m *Metareader) Parse() {
+func (m *DesignerReader) Parse() {
 
 	m.configuration.unmarshalConfig(m.srcpath)
 
@@ -71,12 +77,7 @@ func (m *Metareader) Parse() {
 
 }
 
-func (m *Metareader) CoverData() *coverData {
-
-	return &m.coverData
-}
-
-func (m *Metareader) Files() []string {
+func (m *DesignerReader) Files() []string {
 
 	var files []string
 	for _, v := range m.coverData.Data {
@@ -85,7 +86,11 @@ func (m *Metareader) Files() []string {
 	return files
 }
 
-func (m *Metareader) fillObjects(typeName string, objectNames []string, metaDataType metaDataInt, ModuleTypes ...string) {
+func (m *DesignerReader) CoverData() *coverData {
+	return &m.coverData
+}
+
+func (m *DesignerReader) fillObjects(typeName string, objectNames []string, metaDataType metaDataInt, ModuleTypes ...string) {
 
 	for _, objectName := range objectNames {
 
@@ -103,7 +108,7 @@ func (m *Metareader) fillObjects(typeName string, objectNames []string, metaData
 	}
 }
 
-func (m *Metareader) fillID(typeName string, objectNames []string) {
+func (m *DesignerReader) fillID(typeName string, objectNames []string) {
 
 	for _, v := range objectNames {
 		filename := path.Join(m.srcpath, typeName, v+".xml")
@@ -140,7 +145,7 @@ func (m *Metareader) fillID(typeName string, objectNames []string) {
 	}
 }
 
-func fillform(m *Metareader, srcpath string, formNames []string) {
+func fillform(m *DesignerReader, srcpath string, formNames []string) {
 
 	for _, formName := range formNames {
 		filename := path.Join(srcpath, "Forms", formName+".xml")
@@ -155,7 +160,7 @@ func fillform(m *Metareader, srcpath string, formNames []string) {
 	}
 }
 
-func fillcommand(m *Metareader, srcpath string, Commands []struct {
+func fillcommand(m *DesignerReader, srcpath string, Commands []struct {
 	Uuid       string "xml:\"uuid,attr\""
 	Properties struct {
 		Name string "xml:\"Name\""

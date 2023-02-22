@@ -24,6 +24,16 @@ type Data struct {
 	}
 }
 
+func (s *Data) ReadMetaFile(filename string) {
+
+	unmarshal(filename, s)
+}
+
+func (s *Data) GetData() Data {
+
+	return Data{Uuid: s.Uuid}
+}
+
 type Document struct {
 	Data Data `xml:"Document"`
 }
@@ -410,22 +420,31 @@ const (
 )
 
 const (
-	ManagerModuleFile      string = "ManagerModule.bsl"
-	RecordSetModuleFile    string = "RecordSetModule.bsl"
-	ObjectModuleFile       string = "ObjectModule.bsl"
-	ModuleFile             string = "Module.bsl"
-	CommandModuleFile      string = "CommandModule.bsl"
-	ValueManagerModuleFile string = "ValueManagerModule.bsl"
+	ManagerModuleFile             string = "ManagerModule.bsl"
+	RecordSetModuleFile           string = "RecordSetModule.bsl"
+	ObjectModuleFile              string = "ObjectModule.bsl"
+	ModuleFile                    string = "Module.bsl"
+	CommandModuleFile             string = "CommandModule.bsl"
+	ValueManagerModuleFile        string = "ValueManagerModule.bsl"
+	ExternalConnectionModuleFile  string = "ExternalConnectionModule.bsl"
+	SessionModuleFile             string = "SessionModule.bsl"
+	ManagedApplicationModuleFile  string = "ManagedApplicationModuleFile.bsl"
+	OrdinaryApplicationModuleFile string = "OrdinaryApplicationModule.bsl"
 )
 
 var Filenames map[string]string = map[string]string{
-	ManagerModule:        ManagerModuleFile,
-	RecordSetModule:      RecordSetModuleFile,
-	ObjectModule:         ObjectModuleFile,
-	SimpleModule:         ModuleFile,
-	ManagerModuleStorage: ManagerModuleFile,
-	ValueManagerModule:   ValueManagerModuleFile,
-	CommandModule:        CommandModuleFile,
+	ManagerModule:             ManagerModuleFile,
+	RecordSetModule:           RecordSetModuleFile,
+	ObjectModule:              ObjectModuleFile,
+	SimpleModule:              ModuleFile,
+	ManagerModuleStorage:      ManagerModuleFile,
+	ValueManagerModule:        ValueManagerModuleFile,
+	CommandModule:             CommandModuleFile,
+	FormModule:                ModuleFile,
+	ExternalConnectionModule:  ExternalConnectionModuleFile,
+	SessionModule:             SessionModuleFile,
+	ManagedApplicationModule:  ManagedApplicationModuleFile,
+	OrdinaryApplicationModule: OrdinaryApplicationModuleFile,
 }
 
 type coverData struct {

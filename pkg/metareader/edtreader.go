@@ -23,6 +23,10 @@ func NewEdtReader(src string) *EdtReader {
 	}
 }
 
+func (r *EdtReader) CoverData() *coverData {
+	return &r.coverData
+}
+
 func (m *EdtReader) Parse() {
 	m.configuration.unmarshalConfig(m.srcpath)
 
@@ -55,6 +59,15 @@ func (m *EdtReader) Parse() {
 	m.fillObjects("WebServices", m.configuration.WebServices, SimpleModule)
 	m.fillObjects("ExternalDataSources", m.configuration.ExternalDataSources, ManagerModule)
 
+}
+
+func (m *EdtReader) Files() []string {
+
+	var files []string
+	for _, v := range m.coverData.Data {
+		files = append(files, v)
+	}
+	return files
 }
 
 func (m *EdtReader) fillObjects(typeName string, objectNames []string, ModuleTypes ...string) {
