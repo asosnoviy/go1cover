@@ -87,9 +87,9 @@ func start(context *context) {
 
 	println("---Start---")
 
-	context.reader.Parse()
+	context.reader.ParseMeta()
 
-	files := context.reader.Files()
+	files := context.reader.Reader.Files()
 	go context.parser.Parse(files)
 
 	context.fdebug.Init()
@@ -103,7 +103,7 @@ func Stop(context *context) {
 
 	context.fdebug.Deattach()
 	context.fdebug.Stop()
-	coverage := coveragedata.Convert(context.parser.LinesToCover, context.reader.CoverData().Data, context.fdebug.Storage, context.config.RootPath)
+	coverage := coveragedata.Convert(context.parser.LinesToCover, context.reader.Reader.CoverData().Data, context.fdebug.Storage, context.config.RootPath)
 	context.reportgen.Report(coverage)
 
 }
