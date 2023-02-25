@@ -11,7 +11,9 @@ jobs:
         uses: actions/setup-go@v3
         with:
           go-version: '1.19'
-      - run: make test
+      - run: 
+            go test $(go list ./... | grep -v vendor) -race -coverprofile=coverage.out 
+            go tool cover -func=coverage.out
       - name: Archive code coverage results
         uses: actions/upload-artifact@v1
         with:
