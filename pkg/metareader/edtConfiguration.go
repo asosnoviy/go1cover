@@ -47,35 +47,15 @@ func (c *EdtConfiguration) unmarshalConfig(configurationPatch string) {
 }
 
 type edtData struct {
-	Uuid           string           `xml:"uuid,attr"`
-	Recalculations []Recalculations `xml:"recalculations"`
-	Forms          []Forms          `xml:"forms"`
-	Commands       []Commands       `xml:"commands"`
-	Tables         []string         `xml:"tables"`
-	Cubes          []string         `xml:"cubes"`
+	Uuid           string   `xml:"uuid,attr"`
+	Recalculations []Meta   `xml:"recalculations"`
+	Forms          []Meta   `xml:"forms"`
+	Commands       []Meta   `xml:"commands"`
+	Tables         []string `xml:"tables"`
+	Cubes          []string `xml:"cubes"`
 }
 
-type Forms struct {
-	Uuid string `xml:"uuid,attr"`
-	Name string `xml:"name"`
-}
-
-type Recalculations struct {
-	Uuid string `xml:"uuid,attr"`
-	Name string `xml:"name"`
-}
-
-type Commands struct {
-	Uuid string `xml:"uuid,attr"`
-	Name string `xml:"name"`
-}
-
-type Tables struct {
-	Uuid string `xml:"uuid,attr"`
-	Name string `xml:"name"`
-}
-
-type Cubes struct {
+type Meta struct {
 	Uuid string `xml:"uuid,attr"`
 	Name string `xml:"name"`
 }
@@ -84,16 +64,3 @@ func (s *edtData) ReadMetaFile(filename string) {
 
 	unmarshal(filename, s)
 }
-
-// type Data struct {
-// 	Uuid         string `xml:"uuid,attr"`
-// 	ChildObjects struct {
-// 		Form    []string `xml:"Form"`
-// 		Command []struct {
-// 			Uuid       string `xml:"uuid,attr"`
-// 			Properties struct {
-// 				Name string `xml:"Name"`
-// 			} `xml:"Properties"`
-// 		}
-// 	}
-// }
