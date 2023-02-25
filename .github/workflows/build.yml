@@ -31,9 +31,6 @@ jobs:
         uses: actions/download-artifact@v1
         with:
           name: code-coverage-report
-          path: coverage.out
-      - run:
-          ls coverage.out
       - name: Analyze with SonarCloud
         uses: sonarsource/sonarcloud-github-action@master
         env:
