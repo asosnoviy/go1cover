@@ -16,7 +16,7 @@ type Fdbc struct {
 	infoBaseAlias  string
 	idOfDebuggerUI string
 	debuggerURL    string
-	timeChan       *time.Ticker
+	timeChan       <-chan time.Time
 	stopChan       chan bool
 	sync.Mutex
 	Storage map[ModuleData][]LIneCoverage
@@ -35,7 +35,7 @@ func New(debuggerURL string) *Fdbc {
 		idOfDebuggerUI: "1090f54e-4f23-4193-b005-5e59fe488bdf",
 		debuggerURL:    debuggerURL,
 		Storage:        make(map[ModuleData][]LIneCoverage),
-		timeChan:       time.NewTicker(500 * time.Millisecond),
+		timeChan:       time.NewTimer(500 * time.Millisecond).C,
 		stopChan:       make(chan bool, 2),
 	}
 
@@ -75,10 +75,9 @@ func (f *Fdbc) Attach() {
 				{
 					return
 				}
-			case <-f.timeChan.C:
+			case <-f.timeChan:
 				{
-					pingResult := doRequest(f.client, f.debuggerURL+"/e1crdbg/rdbg?cmd=pingDebugUIParams&dbgui="+f.idOfDebuggerUI, "")
-					pingResultComplete(f, pingResult)
+					ping(f)
 				}
 
 			}
@@ -100,7 +99,7 @@ func (f *Fdbc) Deattach() {
 
 func (f *Fdbc) Stop() {
 
-	f.timeChan.Stop()
+	// f.timeChan.Stop()
 	f.stopChan <- true
 }
 
@@ -133,6 +132,11 @@ func newRequest(url string, body string) *http.Request {
 	req.Header.Set("User-Agent", "1CV8")
 
 	return req
+}
+
+func ping(f *Fdbc) {
+	pingResult := doRequest(f.client, f.debuggerURL+"/e1crdbg/rdbg?cmd=pingDebugUIParams&dbgui="+f.idOfDebuggerUI, "")
+	pingResultComplete(f, pingResult)
 }
 
 func pingResultComplete(f *Fdbc, pingResp *http.Response) {
