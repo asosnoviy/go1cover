@@ -30,17 +30,18 @@ func (r *Lcov) Generate(coverage *coveragdata.Coverage) {
 	for filename, lines := range coverage.Data {
 		f.WriteString("TN:" + "\n")
 		f.WriteString("SF:" + filename + "\n")
-
+		coveredLines := 0
 		for k, v := range lines {
 			covered := "0"
 			if v {
 				covered = "1"
+				coveredLines++
 			}
 			f.WriteString("DA:" + strconv.Itoa(k) + "," + covered + "\n")
 		}
 
 		countlines := strconv.Itoa(len(lines))
-		f.WriteString("LH:0" + "\n")
+		f.WriteString("LH:" + strconv.Itoa(coveredLines) + "\n")
 		f.WriteString("LF:" + countlines + "\n")
 		f.WriteString("end_of_record" + "\n")
 	}
