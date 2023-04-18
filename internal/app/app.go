@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"os/signal"
+	"strconv"
 	"syscall"
 
 	"github.com/asosnoviy/go1cover/internal/config"
@@ -101,9 +102,12 @@ func Stop(context *context) {
 
 	println("---Stop---")
 
-	context.fdebug.Deattach()
 	context.fdebug.Stop()
-	coverage := coveragedata.Convert(context.parser.LinesToCover, context.reader.Reader.CoverData().Data, context.fdebug.Storage, context.config.RootPath)
+	context.fdebug.Deattach()
+
+	coverage := coveragedata.Convert(context.parser.LinesToCover, context.reader.CoverData().Data, context.fdebug.Storage, context.config.RootPath)
+	covered := coveragedata.Covered(context.fdebug, context.parser)
+	fmt.Println("Line coverage:", strconv.Itoa(covered)+"%")
 	context.reportgen.Report(coverage)
 
 }
