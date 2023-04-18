@@ -85,13 +85,13 @@ func exampleLcov() string {
 SF:xources/hello/NoConditions.xoo
 DA:6,1
 DA:7,0
-LH:0
+LH:1
 LF:2
 end_of_record
 TN:
 SF:xources/hello/WithConditions.xoo
 DA:3,1
-LH:0
+LH:1
 LF:1
 end_of_record
 
