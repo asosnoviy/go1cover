@@ -428,7 +428,7 @@ const (
 	ValueManagerModuleFile        string = "ValueManagerModule.bsl"
 	ExternalConnectionModuleFile  string = "ExternalConnectionModule.bsl"
 	SessionModuleFile             string = "SessionModule.bsl"
-	ManagedApplicationModuleFile  string = "ManagedApplicationModuleFile.bsl"
+	ManagedApplicationModuleFile  string = "ManagedApplicationModule.bsl"
 	OrdinaryApplicationModuleFile string = "OrdinaryApplicationModule.bsl"
 )
 
