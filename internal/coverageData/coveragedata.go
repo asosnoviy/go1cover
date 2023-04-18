@@ -16,7 +16,7 @@ type Coverage struct {
 
 func Convert(LinesToCover map[string][]int, metaData map[metareader.Module]string, Storage map[fdbc.ModuleData][]fdbc.LIneCoverage, basePath string) *Coverage {
 
-	data := map[string]map[int]bool{}
+	data := make(map[string]map[int]bool)
 
 	cwd, err := filepath.Abs(basePath)
 	if err != nil {
@@ -38,11 +38,20 @@ func Convert(LinesToCover map[string][]int, metaData map[metareader.Module]strin
 	for md, v := range Storage {
 		module := metareader.Module{ModuleUuid: md.ObjectID, ModuleType: md.PropertyID}
 		for _, lc := range v {
-			lineNo, _ := strconv.Atoi(lc.LineNo)
+			lineNo, err := strconv.Atoi(lc.LineNo)
+			if err != nil {
+				continue
+			}
 
-			path, _ := filepath.Rel(cwd, metaData[module])
+			path, err := filepath.Rel(cwd, metaData[module])
+			if err != nil {
+				continue
+			}
 			sleshedpath := filepath.ToSlash(path)
-			data[sleshedpath][lineNo] = true
+			// fmt.Println(sleshedpath, "-", lineNo)
+			if data[sleshedpath] != nil {
+				data[sleshedpath][lineNo] = true
+			}
 		}
 
 	}
