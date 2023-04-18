@@ -37,8 +37,8 @@ func TestFdbc_Init(t *testing.T) {
 		Post("e1crdbg/rdbg").
 		Reply(200)
 
-	debugClient.Attach()
 	debugClient.timeChan = time.NewTimer(10 * time.Minute).C
+	debugClient.Attach()
 
 	gock.New(debugClient.debuggerURL).
 		MatchParams(map[string]string{"cmd": "pingDebugUIParams", "dbgui": debugClient.idOfDebuggerUI}).
