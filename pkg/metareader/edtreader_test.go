@@ -41,6 +41,7 @@ func TestNewEdtReader(t *testing.T) {
 	assert.Len(t, edtreader.configuration.Reports, 1)
 	assert.Len(t, edtreader.configuration.Tasks, 1)
 	assert.Len(t, edtreader.configuration.WebServices, 1)
+	assert.Len(t, edtreader.configuration.ExchangePlans, 1)
 }
 func TestEdtMeta(t *testing.T) {
 
@@ -89,6 +90,9 @@ func TestEdtMeta(t *testing.T) {
 
 	CheckMeta(t, "ExternalDataSources/ВнешнийИсточникДанных1/Tables/Таблица1", "a2daba70-c996-4cd4-9478-00f901ac7ee6", ManagerModule, ObjectModule, RecordSetModule)
 	CheckMeta(t, "ExternalDataSources/ВнешнийИсточникДанных1/Tables/Таблица1/Forms/ФормаОбъекта", "b61902e8-e31a-4552-baea-206b787001dc", FormModule)
+
+	CheckMeta(t, "ExchangePlans/ПланОбмена1", "242cb07d-3d2b-4689-b590-d3ed23ac9d10", ManagerModule, ObjectModule)
+	CheckMeta(t, "FilterCriteria/КритерийОтбора1", "6e9d3381-0607-43df-866d-14ee5d65a294", ManagerModule)
 
 }
 

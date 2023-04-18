@@ -51,7 +51,7 @@ func (m *EdtReader) Parse() {
 	m.fillObjects("Documents", m.configuration.Documents, ManagerModule, ObjectModule)
 	m.fillObjects("Enums", m.configuration.Enums, ManagerModule)
 	m.fillObjects("ExchangePlans", m.configuration.ExchangePlans, ManagerModule, ObjectModule)
-	m.fillObjects("ExchangePlans", m.configuration.FilterCriteria, ManagerModule)
+	m.fillObjects("FilterCriteria", m.configuration.FilterCriteria, ManagerModule)
 	m.fillObjects("HttpServices", m.configuration.HttpServices, SimpleModule)
 	m.fillObjects("InformationRegisters", m.configuration.InformationRegisters, ManagerModule, RecordSetModule)
 	m.fillObjects("Reports", m.configuration.Reports, ManagerModule, ObjectModule)
