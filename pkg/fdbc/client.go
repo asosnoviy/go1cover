@@ -35,7 +35,7 @@ func New(debuggerURL string) *Fdbc {
 		idOfDebuggerUI: "1090f54e-4f23-4193-b005-5e59fe488bdf",
 		debuggerURL:    debuggerURL,
 		Storage:        make(map[ModuleData][]LIneCoverage),
-		timeChan:       time.NewTimer(500 * time.Millisecond).C,
+		timeChan:       time.NewTicker(500 * time.Millisecond).C,
 		stopChan:       make(chan bool, 2),
 	}
 
@@ -98,7 +98,7 @@ func (f *Fdbc) Deattach() {
 }
 
 func (f *Fdbc) Stop() {
-
+	ping(f)
 	// f.timeChan.Stop()
 	f.stopChan <- true
 }
